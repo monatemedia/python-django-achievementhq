@@ -11,7 +11,7 @@ from django.template.loader import get_template
 
 #################### index ####################################### 
 def index(request):
-    return render(request, 'user/index.html', {'title':'Chatster'})
+    return render(request, 'user/index.html', {'title':'AchievementHQ'})
 
 ########### register here ##################################### 
 def register(request):
