@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-jqp)10g_rkt9tpu6g&b8bz(7vb0ljt_rhno5ahyee&)#5=@kg-'
+SECRET_KEY = 'django-insecure-tbc7b14m&#%4g9&0cf&yd71j-)l#fs50fi-jd$8&&m)n%&#iez'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,14 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    ##user app
-    'user.apps.UserConfig',
-    ##posts app
-    'posts.apps.PostsConfig',
-    ##crispy_forms
-    'crispy_forms',
-    'crispy_bootstrap4',
-    ##django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -129,9 +121,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-LOGOUT_REDIRECT_URL = '/'
