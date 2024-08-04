@@ -32,11 +32,11 @@
   <a href="https://github.com/othneildrew/Best-README-Template">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
-  
+
   <h3 align="center">AchievementHQ-README</h3>
 
   <p align="center">
-    I highly recommend keeping track of all your achievements, no matter how big or small they are! 🎯 Achievement HQ is a project for your and your friends to track and celebrate each other's achievements!
+    I highly recommend keeping track of all your achievements, no matter how big or small they are! 🎯 Achievement HQ is a project for you and your friends to track and celebrate each other's achievements!
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />
@@ -147,10 +147,15 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
-5. Inject Fake Users
+5. Inject Fake Users (Optional)
 
 ```sh
 python manage.py shell
+```
+
+- Inject Fake Questions and Answers
+
+```sh
   >>>  from polls.models import Question, Choice
   >>>  from django.utils import timezone
   >>>  Question.objects.all()
@@ -170,6 +175,12 @@ python manage.py shell
   >>>  quit()
 ```
 
+6. Run server on http: 127.0.0.1:8000 (ctrl+c to stop)
+
+```sh
+python manage.py runserver
+```
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
@@ -186,13 +197,15 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Roadmap
 
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-- [ ] Chinese
-- [ ] Spanish
+- [x] Add Bootstrap Theme and Static Files
+- [x] Add Templates Folder For Easy Template Management
+- [x] Add Polls App
+- [ ] Add Users App
+  - [ ] Add Sign Up Page
+  - [ ] Add Log In Page
+- [ ] Add Posts App
+  - [ ] Add Posts CRUD
+  - [ ] Add Posts Timeline
 
 See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
 
