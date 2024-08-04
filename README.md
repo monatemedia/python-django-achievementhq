@@ -35,7 +35,7 @@
   <h3 align="center">AchievementHQ-README</h3>
 
   <p align="center">
-    I highly recommend keeping track of all your achievements, no matter how big or small they are! 🎯 Achievement HQ is a project for your and your friends to track and catch up on ech other's achievements!
+    I highly recommend keeping track of all your achievements, no matter how big or small they are! 🎯 Achievement HQ is a project for your and your friends to track and celebrate each other's achievements!
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />
@@ -107,35 +107,71 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+These are the instructions on setting up your project locally. To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+The project requires Python 3 and pipenv to be installed on your local machine.
 
-- npm
+- Install pipenv
   ```sh
-  npm install npm@latest -g
+  pip install pipenv
   ```
 
 ### Installation
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = "ENTER YOUR API";
-   ```
+1. Create Venv
+
+```sh
+pipenv shell
+```
+
+2. Install Django
+
+```sh
+pipenv install django
+```
+
+3. Run initial migrations
+
+```sh
+python manage.py migrate
+```
+
+4. Create admin user
+
+```sh
+python manage.py createsuperuser
+```
+
+5. Inject Fake Users
+
+```sh
+python manage.py shell
+```
+
+````sh
+  >>>  from polls.models import Question, Choice
+  >>>  from django.utils import timezone
+  >>>  Question.objects.all()
+  >>>  q = Question(question_text="What is your favorite Python Framework?", pub_date=timezone.now())
+  >>>  q.save()
+  >>>  q.id
+  >>>  q.question_text
+  >>>  Question.objects.all()
+  >>>  Question.objects.filter(id=1)
+  >>>  Question.objects.get(pk=1)
+  >>>  q = Question.objects.get(pk=1)
+  >>>  q.choice_set.all()
+  >>>  q.choice_set.create(choice_text='Django', votes=0)
+  >>>  q.choice_set.create(choice_text='Flask', votes=0)
+  >>>  q.choice_set.create(choice_text='Flask', votes=0)
+  >>>  q.choice_set.all()
+  >>>  quit()
+  ```
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -158,8 +194,8 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [ ] Add Additional Templates w/ Examples
 - [ ] Add "components" document to easily copy & paste sections of the readme
 - [ ] Multi-language Support
-  - [ ] Chinese
-  - [ ] Spanish
+- [ ] Chinese
+- [ ] Spanish
 
 See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
 
@@ -214,6 +250,7 @@ A list of resources that I found helpful and inspirational!
 - [Django Project By The Django Software Foundation](https://www.djangoproject.com/)
 - [Bootstrap 5 Registration Form Component By Material Design For Bootstrap](https://mdbootstrap.com/docs/standard/extended/registration/)
 - [Bootstrap 5 Login Form Component By Material Design For Bootstrap](https://mdbootstrap.com/docs/standard/extended/registration/)
+- [Best README Template By Othneil Drew](https://github.com/othneildrew/Best-README-Template)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -237,3 +274,4 @@ A list of resources that I found helpful and inspirational!
 [Django-url]: https://www.djangoproject.com/
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
+````
