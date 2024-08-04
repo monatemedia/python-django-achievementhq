@@ -210,6 +210,7 @@ A list of resources that I found helpful and inspirational!
 - [Brad Traversy Python Django Crash Course Gist With Commands](https://gist.github.com/bradtraversy/06538da5924882b2cf30fa6310d505b1)
 - [GeeksforGeeks Django Sign Up and Login With Confirmation Email](https://www.geeksforgeeks.org/django-sign-up-and-login-with-confirmation-email-python/)
 - [Aman Goyal How To Create A Timeline To Track Your Achievements](https://dev.to/goyalaman/how-to-create-a-timeline-to-track-your-achievements-3cg2)
+- [Start Bootstrap Theme Personal](https://startbootstrap.com/theme/personal)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
