@@ -150,9 +150,6 @@ python manage.py createsuperuser
 
 ```sh
 python manage.py shell
-```
-
-````sh
   >>>  from polls.models import Question, Choice
   >>>  from django.utils import timezone
   >>>  Question.objects.all()
@@ -170,8 +167,7 @@ python manage.py shell
   >>>  q.choice_set.create(choice_text='Flask', votes=0)
   >>>  q.choice_set.all()
   >>>  quit()
-  ```
-
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -274,4 +270,7 @@ A list of resources that I found helpful and inspirational!
 [Django-url]: https://www.djangoproject.com/
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
-````
+
+```
+
+```
