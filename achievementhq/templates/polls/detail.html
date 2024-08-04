@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
+<!-- Page content-->
+<section class="py-5">
+	<div class="container px-5">
 <a class="btn btn-secondary btn-sm mb-3" href="{% url 'polls:index' %}">Back To Polls</a>
 <h1 class="text-center mb-3">{{ question.question_text }}</h1>
 
@@ -26,4 +29,6 @@
 	{% endfor %}
 	<input type="submit" value="Vote" class="btn btn-success btn-lg btn-block mt-4" />
 </form>
+</div>
+</section>
 {% endblock %}

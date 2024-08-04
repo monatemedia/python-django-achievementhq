@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
+<!-- Page content-->
+<section class="py-5">
+	<div class="container px-5">
 <h1 class="mb-5 text-center">{{ question.question_text }}</h1>
 
 <ul class="list-group mb-5">
@@ -12,4 +15,6 @@
 
 <a class="btn btn-secondary" href="{% url 'polls:index' %}">Back To Polls</a>
 <a class="btn btn-dark" href="{% url 'polls:detail' question.id %}">Vote again?</a>
+</div>
+</section>
 {% endblock %}
