@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     # Users app
     'users.apps.UsersConfig',
+    # Posts app
+    'posts.apps.PostsConfig',
 
     # Django apps
     'django.contrib.admin',

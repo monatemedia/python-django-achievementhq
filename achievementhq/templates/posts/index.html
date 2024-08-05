@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>My Posts</h1>
+<a href="{% url 'posts:create' %}">Create New Post</a>
+<ul>
+    {% for post in posts %}
+    <li>
+        <a href="{% url 'posts:detail' post.id %}">{{ post.heading_text }}</a> - {{ post.pub_date }}
+        <a href="{% url 'posts:update' post.id %}">Edit</a>
+        <a href="{% url 'posts:delete' post.id %}">Delete</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

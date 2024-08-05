@@ -16,7 +16,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from users import views as user_views
 
 urlpatterns = [
     
@@ -26,6 +25,8 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     # Include users routes
     path('users/', include('users.urls')),
+    # Include posts routes
+    path('posts/', include('posts.urls')),
     
     path('admin/', admin.site.urls),
 ]

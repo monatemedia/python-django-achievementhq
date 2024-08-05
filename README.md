@@ -36,7 +36,7 @@
   <h3 align="center">AchievementHQ-README</h3>
 
   <p align="center">
-    I highly recommend keeping track of all your achievements, no matter how big or small they are! 🎯 Achievement HQ is a project for you and your friends to track and celebrate each other's achievements!
+    We highly recommend keeping track of all your achievements, no matter how big or small they are! 🎯 Achievement HQ is a project for you and your friends to track and celebrate each other's achievements!
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />
@@ -271,7 +271,6 @@ A list of resources that I found helpful and inspirational!
 - [Start Bootstrap Theme Personal](https://startbootstrap.com/theme/personal)
 - [Django Project By The Django Software Foundation](https://www.djangoproject.com/)
 - [Bootstrap 5 Registration Form Component By Material Design For Bootstrap](https://mdbootstrap.com/docs/standard/extended/registration/)
-- [Bootstrap 5 Login Form Component By Material Design For Bootstrap](https://mdbootstrap.com/docs/standard/extended/login/)
 - [Best README Template By Othneil Drew](https://github.com/othneildrew/Best-README-Template)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
