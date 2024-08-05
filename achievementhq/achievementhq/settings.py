@@ -33,8 +33,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # polls app
+    # Polls app
     'polls.apps.PollsConfig',
+    # Users app
+    'users.apps.UsersConfig',
+
+    # Django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -66,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'users.context_processors.custom_context_processors.excluded_paths',  # Custom context processor
             ],
         },
     },

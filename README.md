@@ -206,6 +206,16 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [ ] Add Posts App
   - [ ] Add Posts CRUD
   - [ ] Add Posts Timeline
+- [ ] Add Protected Routes
+- [ ] Add Comments App
+  - [ ] Allow Users To Comment On Posts
+  - [ ] Allow Authors to Delete Comments
+- [ ] Use Django’s URL Template Tag To Make Navigation Links Dynamic
+- [ ] Add Error Pages Template
+- [ ] Switch From Broswer Alerts To Bootstrap Alerts
+- [ ] Add Emails App
+  - [ ] Send Registration And Password Reset Email
+  - [ ] Send Marketing Emails
 
 See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
 
@@ -259,7 +269,7 @@ A list of resources that I found helpful and inspirational!
 - [Start Bootstrap Theme Personal](https://startbootstrap.com/theme/personal)
 - [Django Project By The Django Software Foundation](https://www.djangoproject.com/)
 - [Bootstrap 5 Registration Form Component By Material Design For Bootstrap](https://mdbootstrap.com/docs/standard/extended/registration/)
-- [Bootstrap 5 Login Form Component By Material Design For Bootstrap](https://mdbootstrap.com/docs/standard/extended/registration/)
+- [Bootstrap 5 Login Form Component By Material Design For Bootstrap](https://mdbootstrap.com/docs/standard/extended/login/)
 - [Best README Template By Othneil Drew](https://github.com/othneildrew/Best-README-Template)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

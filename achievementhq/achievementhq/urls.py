@@ -16,12 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from users import views as user_views
 
 urlpatterns = [
-    # Include polls routes
-    path('polls/', include('polls.urls')),
+    
     # Include pages routes
     path('', include('pages.urls')),
+    # Include polls routes
+    path('polls/', include('polls.urls')),
+    # Include users routes
+    path('users/', include('users.urls')),
     
     path('admin/', admin.site.urls),
 ]
