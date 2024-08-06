@@ -156,54 +156,25 @@ python manage.py shell
 - Delete all users except for the admin user
 
 ```sh
-from django.contrib.auth.models import User
-
-# Specify the username of the admin user
-admin_username = 'admin'
-
-# Get the admin user
-admin_user = User.objects.get(username=admin_username)
-
-# Delete all users except the admin user
-User.objects.exclude(id=admin_user.id).delete()
-
-# Verify the remaining users
-User.objects.all()
+python manage.py delete_non_admin_users
 ```
 
-- Create 20 Fke Users
+- Create Fake Users
 
 ```sh
-from django.contrib.auth.models import User
-from faker import Faker
-from django.utils import timezone
-from datetime import timedelta
+python manage.py create_users
+```
 
-fake = Faker()
+- Create Fake Posts
 
-# Define the password
-password = 'DecreasePrototypeEasiestOxidant'
+```sh
+python manage.py create_posts
+```
 
-# Calculate the date range
-end_date = timezone.now()
-start_date = end_date - timedelta(days=5*365)
+- Create Fake Comments
 
-for _ in range(20):
-    # Generate a random date between start_date and end_date
-    random_date = fake.date_between(start_date=start_date, end_date=end_date)
-    # Convert to timezone-aware datetime
-    random_date = timezone.make_aware(datetime.combine(random_date, datetime.min.time()))
-
-    # Create a new user
-    User.objects.create_user(
-        username=fake.user_name(),
-        email=fake.email(),
-        password=password,
-        date_joined=random_date
-    )
-
-# Verify the created users
-print(User.objects.all())
+```sh
+python manage.py create_comments
 ```
 
 6. Run server on http: 127.0.0.1:8000 (ctrl+c to stop)
