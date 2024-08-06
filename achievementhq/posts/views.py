@@ -30,7 +30,11 @@ def create(request):
             return redirect('posts:index')
     else:
         form = PostForm()
-    return render(request, 'posts/form.html', {'form': form, 'title': 'Create Post', 'is_editing': False})
+    return render(request, 'posts/form.html', {
+        'form': form,
+        'title': 'Create Post',
+        'is_editing': False,
+    })
 
 # Read a specific post
 @login_required
@@ -49,7 +53,12 @@ def update(request, post_id):
             return redirect('posts:detail', post_id=post.id)
     else:
         form = PostForm(instance=post)
-    return render(request, 'posts/form.html', {'form': form, 'title': 'Edit Post', 'post': post, 'is_editing': True})
+    return render(request, 'posts/form.html', {
+        'form': form,
+        'title': 'Edit Post',
+        'post': post,
+        'is_editing': True,
+    })
 
 # Delete a post
 @login_required
