@@ -8,7 +8,15 @@ from django.utils import timezone
 @login_required
 def index(request):
     posts = Post.objects.filter(user=request.user).order_by('-pub_date')
-    return render(request, 'posts/index.html', {'posts': posts})
+    user_joined_date = request.user.date_joined
+    user_name = request.user.username
+    current_year = timezone.now().year
+    return render(request, 'posts/index.html', {
+        'posts': posts,
+        'user_joined_date': user_joined_date,
+        'user_name': user_name,
+        'current_year': current_year
+    })
 
 # Create a new post
 @login_required
