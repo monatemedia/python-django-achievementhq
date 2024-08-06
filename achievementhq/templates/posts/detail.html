@@ -1,9 +1,44 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>{{ post.heading_text }}</h1>
-<p>{{ post.message_text }}</p>
-<p>Published on: {{ post.pub_date }}</p>
-<a href="{% url 'posts:update' post.id %}">Edit</a>
-<a href="{% url 'posts:delete' post.id %}">Delete</a>
-<a href="{% url 'posts:index' %}">Back to list</a>
+<!-- Page content-->
+<section class="py-5">
+    <div class="container px-5">
+        <!-- Detail form-->
+        <div class="bg-light rounded-4 py-5 px-4 px-md-5">
+            <div class="text-center mb-2">
+                <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i class="bi bi-award"></i></div>
+                <h1 class="fw-bolder">One Of {{ post.user.username }}'s Achievements</h1>
+                <p class="lead fw-normal text-muted mb-0">{{ post.user.username }} posted a new achievement on {{ post.pub_date|date:"d M Y" }}</p>
+            </div>
+            <!-- Detail Speech Bubble -->
+            <div class="timeline">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="timeline-container">
+                                <div class="timeline-launch">
+                                    <div class="timeline-box">
+                                        <div class="timeline-text">
+                                            <h3>{{ post.heading_text }}</h3>
+                                            <p>{{ post.message_text }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="custom-buttons-group">
+                                        <div class="custom-buttons-left">
+                                            <a class="btn btn-outline-primary" href="{% url 'posts:update' post.id %}" role="button">Edit</a>
+                                            <a class="btn btn-outline-secondary" href="{% url 'posts:delete' post.id %}" role="button">Delete</a>
+                                        </div>
+                                        <div class="custom-buttons-right">
+                                            <a class="btn btn-primary" href="{% url 'posts:index' %}" role="button">Back to list>></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

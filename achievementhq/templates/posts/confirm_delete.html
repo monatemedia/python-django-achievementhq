@@ -1,10 +1,45 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
-  <h2>Are you sure you want to delete "{{ post.title }}"?</h2>
-  <form method="post">
-    {% csrf_token %}
-    <button type="submit">Confirm</button>
-    <a href="{% url 'posts:index' %}">Cancel</a>
-  </form>
+<!-- Page content-->
+<section class="py-5">
+    <div class="container px-5">
+        <!-- Delete confirmation form-->
+        <div class="bg-light rounded-4 py-5 px-4 px-md-5">
+            <div class="text-center mb-2">
+                <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i class="bi bi-award"></i></div>
+                <h1 class="fw-bolder">Are You Sure?</h1>
+                <p class="lead fw-normal text-muted mb-0">You are about to delete "{{ post.heading_text }}". This action cannot be undone.</p>
+            </div>
+            <!-- Delete Confirmation Form Component -->
+            <div class="timeline">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="timeline-container">
+                                <div class="row gx-5 justify-content-center">
+                                    <div class="col-lg-8 col-xl-6">
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <div class="custom-buttons-group">
+                                                <div class="custom-buttons-left">
+                                                    <!-- Confirm Button-->
+                                                    <div class="d-grid"><button class="btn btn-danger btn-lg" type="submit">Confirm</button></div>
+                                                </div>
+                                                <div class="custom-buttons-right">
+                                                    <!-- Cancel Button-->
+                                                    <div class="d-grid"><a class="btn btn-outline-secondary btn-lg" href="{% url 'posts:index' %}" role="button">Cancel</a></div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

@@ -1,10 +1,88 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>{{ title }}</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
-<a href="{% url 'posts:index' %}">Back to list</a>
+<!-- Page content-->
+<section class="py-5">
+    <div class="container px-5">
+        <!-- Edit form-->
+        <div class="bg-light rounded-4 py-5 px-4 px-md-5">
+            <div class="text-center mb-2">
+                <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i class="bi bi-award"></i></div>
+                {% if is_editing %}
+                    <h1 class="fw-bolder">You're Editing One Of Your Achievements</h1>
+                    <p class="lead fw-normal text-muted mb-0">You posted this achievement on {{ post.pub_date|date:"d M Y" }}</p>
+                {% else %}
+                    <h1 class="fw-bolder">You're Posting A New Achievement!</h1>
+                    <p class="lead fw-normal text-muted mb-0">Congratulations on your new achievement!</p>
+                {% endif %}
+            </div>
+            <!-- Edit Form Component -->
+            <div class="timeline">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="timeline-container">
+                                <div class="row gx-5 justify-content-center">
+                                    <div class="col-lg-8 col-xl-6">
+                                        <form method="post">
+                                            {% csrf_token %}
+
+                                            <!-- Title input-->
+                                            <div class="form-floating mb-3">
+                                                <input 
+                                                    type="text" 
+                                                    id="id_heading_text" 
+                                                    name="heading_text" 
+                                                    class="form-control" 
+                                                    placeholder="Enter your title..." 
+                                                    maxlength="60"
+                                                    value="{{ form.heading_text.value|default_if_none:'' }}"
+                                                />
+                                                <label for="id_heading_text">Title (60 Characters)</label>
+                                                <div class="invalid-feedback">
+                                                    {% if form.heading_text.errors %}
+                                                        {{ form.heading_text.errors }}
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                            <!-- Message input-->
+                                            <div class="form-floating mb-3">
+                                                <textarea 
+                                                    id="id_message_text" 
+                                                    name="message_text" 
+                                                    class="form-control custom-textarea" 
+                                                    placeholder="Enter your message..." 
+                                                    maxlength="280"
+                                                    style="height: 200px; resize: vertical;" 
+                                                >{{ form.message_text.value|default_if_none:'' }}</textarea>
+                                                <label for="id_message_text">Message (280 Characters)</label>
+                                                <div class="invalid-feedback">
+                                                    {% if form.message_text.errors %}
+                                                        {{ form.message_text.errors }}
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                            <div class="custom-buttons-group">
+                                                <div class="custom-buttons-left">
+                                                    <!-- Submit Button-->
+                                                    <div class="d-grid"><button class="btn btn-primary btn-lg" type="submit">Save</button></div>
+                                                </div>
+                                                <div class="custom-buttons-right">
+                                                    <!-- Back to List Button-->
+                                                    <div class="d-grid"><a class="btn btn-outline-secondary btn-lg" href="{% url 'posts:index' %}" role="button">Back to List>></a></div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
