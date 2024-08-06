@@ -7,13 +7,20 @@
         <div class="bg-light rounded-4 py-5 px-4 px-md-5">
             <div class="text-center mb-2">
                 <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i class="bi bi-award"></i></div>
-                {% if is_editing %}
-                    <h1 class="fw-bolder">You're Editing One Of Your Achievements</h1>
-                    <p class="lead fw-normal text-muted mb-0">You posted this achievement on {{ post.pub_date|date:"d M Y" }}</p>
-                {% else %}
-                    <h1 class="fw-bolder">You're Posting A New Achievement!</h1>
-                    <p class="lead fw-normal text-muted mb-0">Congratulations on your new achievement!</p>
-                {% endif %}
+                <h1 class="fw-bolder">
+                    {% if is_editing %}
+                        You're Editing One Of Your Achievements
+                    {% else %}
+                        You're Posting A New Achievement!
+                    {% endif %}
+                </h1>
+                <p class="lead fw-normal text-muted mb-0">
+                    {% if is_editing %}
+                        You posted this achievement on {{ post.pub_date|date:"d M Y" }}
+                    {% else %}
+                        Congratulations on your new achievement
+                    {% endif %}
+                </p>
             </div>
             <!-- Edit Form Component -->
             <div class="timeline">
@@ -25,7 +32,6 @@
                                     <div class="col-lg-8 col-xl-6">
                                         <form method="post">
                                             {% csrf_token %}
-
                                             <!-- Title input-->
                                             <div class="form-floating mb-3">
                                                 <input 
@@ -44,7 +50,6 @@
                                                     {% endif %}
                                                 </div>
                                             </div>
-
                                             <!-- Message input-->
                                             <div class="form-floating mb-3">
                                                 <textarea 
@@ -62,7 +67,6 @@
                                                     {% endif %}
                                                 </div>
                                             </div>
-
                                             <div class="custom-buttons-group">
                                                 <div class="custom-buttons-left">
                                                     <!-- Submit Button-->
@@ -73,7 +77,6 @@
                                                     <div class="d-grid"><a class="btn btn-outline-secondary btn-lg" href="{% url 'posts:index' %}" role="button">Back to List>></a></div>
                                                 </div>
                                             </div>
-
                                         </form>
                                     </div>
                                 </div>
