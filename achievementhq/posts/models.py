@@ -10,3 +10,12 @@ class Post(models.Model):
 
     def __str__(self):
         return self.heading_text
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+    comments_text = models.CharField(max_length=280)
+    pub_date = models.DateTimeField(default=datetime.now)
+
+    def __str__(self):
+        return self.comments_text
