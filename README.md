@@ -153,26 +153,57 @@ python manage.py createsuperuser
 python manage.py shell
 ```
 
-- Inject Fake Polls Questions and Answers
+- Delete all users except for the admin user
 
 ```sh
-  >>>  from polls.models import Question, Choice
-  >>>  from django.utils import timezone
-  >>>  Question.objects.all()
-  >>>  q = Question(question_text="What is your favorite Python Framework?", pub_date=timezone.now())
-  >>>  q.save()
-  >>>  q.id
-  >>>  q.question_text
-  >>>  Question.objects.all()
-  >>>  Question.objects.filter(id=1)
-  >>>  Question.objects.get(pk=1)
-  >>>  q = Question.objects.get(pk=1)
-  >>>  q.choice_set.all()
-  >>>  q.choice_set.create(choice_text='Django', votes=0)
-  >>>  q.choice_set.create(choice_text='Flask', votes=0)
-  >>>  q.choice_set.create(choice_text='Flask', votes=0)
-  >>>  q.choice_set.all()
-  >>>  quit()
+from django.contrib.auth.models import User
+
+# Specify the username of the admin user
+admin_username = 'admin'
+
+# Get the admin user
+admin_user = User.objects.get(username=admin_username)
+
+# Delete all users except the admin user
+User.objects.exclude(id=admin_user.id).delete()
+
+# Verify the remaining users
+User.objects.all()
+```
+
+- Create 20 Fke Users
+
+```sh
+from django.contrib.auth.models import User
+from faker import Faker
+from django.utils import timezone
+from datetime import timedelta
+
+fake = Faker()
+
+# Define the password
+password = 'DecreasePrototypeEasiestOxidant'
+
+# Calculate the date range
+end_date = timezone.now()
+start_date = end_date - timedelta(days=5*365)
+
+for _ in range(20):
+    # Generate a random date between start_date and end_date
+    random_date = fake.date_between(start_date=start_date, end_date=end_date)
+    # Convert to timezone-aware datetime
+    random_date = timezone.make_aware(datetime.combine(random_date, datetime.min.time()))
+
+    # Create a new user
+    User.objects.create_user(
+        username=fake.user_name(),
+        email=fake.email(),
+        password=password,
+        date_joined=random_date
+    )
+
+# Verify the created users
+print(User.objects.all())
 ```
 
 6. Run server on http: 127.0.0.1:8000 (ctrl+c to stop)
