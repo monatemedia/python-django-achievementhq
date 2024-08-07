@@ -16,6 +16,6 @@ urlpatterns = [
     path('comments/<int:comment_id>/delete/', views.delete_comment, name='delete_comment'),
     path('<int:post_id>/', views.detail, name='detail'),
     # User URLs
-    path('user_list/', views.user_list, name='user_list'),
+    path('user_list/', views.user_list, name='user_list'),  # This should match the URL you want
     path('user/<int:user_id>/', views.index, name='user_index'),
 ]
