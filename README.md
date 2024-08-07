@@ -121,24 +121,22 @@ The project requires Python 3 and pipenv to be installed on your local machine.
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Create Venv
-
-```sh
-pipenv shell
-```
-
-2.  Download repository
+1.  Download repository
 
 ```sh
 git clone https://github.com/monatemedia/python-django-achievementhq.git
 ```
 
-3. Change into directory app directory
+4. Change into directory app directory
 
 ```sh
 cd python-django-achievementhq/achievementhq
+```
+
+3. Create Venv
+
+```sh
+pipenv shell
 ```
 
 4. Run the demo app
