@@ -12,7 +12,7 @@
                     {{ subtitle }}
                 </p>
             </div>
-            <!-- Comment Form Component -->
+            <!-- Comment Detail Component -->
             <div class="timeline">
                 <div class="container">
                     <div class="row">
@@ -20,40 +20,75 @@
                             <div class="timeline-container">
                                 <div class="row gx-5 justify-content-center">
                                     <div class="col-lg-8 col-xl-6">
-                                        <form method="post">
-                                            {% csrf_token %}
-                                            <!-- Comment input-->
-                                            <div class="form-floating mb-3">
-                                                <textarea 
-                                                    id="id_comments_text" 
-                                                    name="comments_text" 
-                                                    class="form-control custom-textarea" 
-                                                    placeholder="Enter your comment..." 
-                                                    maxlength="280"
-                                                    style="height: 200px; resize: vertical;" 
-                                                >{{ form.comments_text.value|default_if_none:'' }}</textarea>
-                                                <label for="id_comments_text">Comment (280 Characters)</label>
-                                                <div class="invalid-feedback">
-                                                    {% if form.comments_text.errors %}
-                                                        {{ form.comments_text.errors }}
-                                                    {% endif %}
+                                        {% if form %}
+                                            <form method="post">
+                                                {% csrf_token %}
+                                                <!-- Comment input-->
+                                                <div class="form-floating mb-3">
+                                                    <textarea 
+                                                        id="id_comments_text" 
+                                                        name="comments_text" 
+                                                        class="form-control custom-textarea" 
+                                                        placeholder="Enter your comment..." 
+                                                        maxlength="280"
+                                                        style="height: 200px; resize: vertical;" 
+                                                    >{{ form.comments_text.value|default_if_none:'' }}</textarea>
+                                                    <label for="id_comments_text">Comment (280 Characters)</label>
+                                                    <div class="invalid-feedback">
+                                                        {% if form.comments_text.errors %}
+                                                            {{ form.comments_text.errors }}
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="custom-buttons-group">
+                                                    <div class="custom-buttons-left">
+                                                        <!-- Submit Button-->
+                                                        <div class="d-grid">
+                                                            <button class="btn btn-primary btn-lg" type="submit">Save</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="custom-buttons-right">
+                                                        <!-- Back to Post Button-->
+                                                        <div class="d-grid">
+                                                            <a class="btn btn-outline-secondary btn-lg" href="{% url 'posts:detail' post.id %}" role="button">Back to Post</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        {% else %}
+                                            <div class="timeline-box">
+                                                <div class="timeline-text">
+                                                    <p>{{ comment.comments_text }}</p>
+                                                    <p class="lead fw-normal text-muted mb-0">- {{ comment.user.username }} on {{ comment.pub_date|date:"d M Y" }}</p>
                                                 </div>
                                             </div>
                                             <div class="custom-buttons-group">
-                                                <div class="custom-buttons-left">
-                                                    <!-- Submit Button-->
-                                                    <div class="d-grid">
-                                                        <button class="btn btn-primary btn-lg" type="submit">Save</button>
-                                                    </div>
-                                                </div>
                                                 <div class="custom-buttons-right">
                                                     <!-- Back to Post Button-->
                                                     <div class="d-grid">
-                                                        <a class="btn btn-outline-secondary btn-lg" href="{% url 'posts:detail' post.id %}" role="button">Back to Post</a>
+                                                        <a class="btn btn-outline-secondary btn-lg" href="{% url 'posts:detail' comment.post.id %}" role="button">Back to Post</a>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
+                                        {% endif %}
+                                        {% if user == comment.user or user == comment.post.user %}
+                                            <div class="custom-buttons-group mt-3">
+                                                <div class="custom-buttons-left">
+                                                    {% if user == comment.user %}
+                                                        <!-- Edit Button-->
+                                                        <div class="d-grid">
+                                                            <a class="btn btn-warning btn-lg" href="{% url 'posts:update_comment' comment.id %}" role="button">Edit</a>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="custom-buttons-right">
+                                                    <!-- Delete Button-->
+                                                    <div class="d-grid">
+                                                        <a class="btn btn-danger btn-lg" href="{% url 'posts:delete_comment' comment.id %}" role="button">Delete</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -65,4 +100,3 @@
     </div>
 </section>
 {% endblock %}
-

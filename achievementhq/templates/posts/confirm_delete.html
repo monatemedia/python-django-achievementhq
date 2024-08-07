@@ -9,15 +9,21 @@
             <div class="text-center mb-2">
                 <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i class="bi bi-exclamation-circle"></i></div>
                 <h1 class="fw-bolder">Confirm Deletion</h1>
-                <p class="lead fw-normal text-muted mb-0">Are you sure you want to delete "{{ post.heading_text }}"?</p>
+                {% if post %}
+                    <p class="lead fw-normal text-muted mb-0">Are you sure you want to delete the post "{{ post.heading_text }}"?</p>
+                {% elif comment %}
+                    <p class="lead fw-normal text-muted mb-0">Are you sure you want to delete the comment?</p>
+                {% endif %}
             </div>
             <!-- Delete Form Component -->
             <div class="timeline">
                 <div class="container">
                     <div class="row gx-5 justify-content-center">
                         <div class="col-lg-8 col-xl-6">
-                            <form method="post">
+                            <form method="post" action="{% url 'posts:confirm_delete' %}">
                                 {% csrf_token %}
+                                <input type="hidden" name="post_id" value="{{ post.id }}">
+                                <input type="hidden" name="comment_id" value="{{ comment.id }}">
                                 <div class="custom-buttons-group">
                                     <div class="custom-buttons-left">
                                         <!-- Confirm Button-->

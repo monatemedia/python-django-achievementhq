@@ -33,6 +33,7 @@
                 </p>
             </div>
             <!-- Create new achievement button -->
+            {% if user_owns_posts %}
             <div class="timeline">
                 <div class="container">
                     <div class="row">
@@ -50,6 +51,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
     <!-- Achievement Timeline -->
@@ -93,6 +95,7 @@
                                                                 <i class="fa fa-award"></i>
                                                             </div>
                                                             <div class="timeline-text">
+                                                                <!-- Update this link to point to comment_detail or post_detail as needed -->
                                                                 <a href="{% url 'posts:detail' post.id %}">
                                                                     <h3>{{ post.heading_text }}</h3>
                                                                 </a>
@@ -122,6 +125,7 @@
                                                                 <i class="fa fa-award"></i>
                                                             </div>
                                                             <div class="timeline-text">
+                                                                <!-- Update this link to point to comment_detail or post_detail as needed -->
                                                                 <a href="{% url 'posts:detail' post.id %}">
                                                                     <h3>{{ post.heading_text }}</h3>
                                                                 </a>

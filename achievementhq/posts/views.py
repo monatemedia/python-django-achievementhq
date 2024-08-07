@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User  # Correct import for User model
 from .models import Post, Comment
@@ -22,26 +23,30 @@ def user_list(request):
 
     return render(request, 'posts/user_list.html', {'user_data': user_data})
 
-# List all posts
 @login_required
 def index(request, user_id=None):
-    if user_id:
-        user = get_object_or_404(User, id=user_id)
-        posts = Post.objects.filter(user=user).order_by('-pub_date')
-        user_name = user.username
-        user_joined_date = user.date_joined
-    else:
-        posts = Post.objects.filter(user=request.user).order_by('-pub_date')
-        user_name = request.user.username
-        user_joined_date = request.user.date_joined
+    try:
+        if user_id:
+            user = get_object_or_404(User, id=user_id)
+            posts = Post.objects.filter(user=user).order_by('-pub_date')
+            user_name = user.username
+            user_joined_date = user.date_joined
+            user_owns_posts = user == request.user
+        else:
+            posts = Post.objects.filter(user=request.user).order_by('-pub_date')
+            user_name = request.user.username
+            user_joined_date = request.user.date_joined
+            user_owns_posts = True
+    except User.DoesNotExist:
+        raise Http404("User does not exist")
 
     return render(request, 'posts/index.html', {
         'posts': posts,
         'user_joined_date': user_joined_date,
         'user_name': user_name,
         'user_id': user_id,
+        'user_owns_posts': user_owns_posts,
     })
-
 
 # Create a new post
 @login_required
@@ -65,9 +70,12 @@ def create(request):
 # Read a specific post
 @login_required
 def detail(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-    comments = Comment.objects.filter(post=post).order_by('-pub_date')
-
+    try:
+        post = get_object_or_404(Post, id=post_id)
+        comments = Comment.objects.filter(post=post).order_by('-pub_date')
+    except Post.DoesNotExist:
+        raise Http404("Post does not exist")
+    
     return render(request, 'posts/detail.html', {
         'post': post,
         'comments': comments,
@@ -76,7 +84,11 @@ def detail(request, post_id):
 # Update an existing post
 @login_required
 def update(request, post_id):
-    post = get_object_or_404(Post, id=post_id, user=request.user)
+    try:
+        post = get_object_or_404(Post, id=post_id, user=request.user)
+    except Post.DoesNotExist:
+        raise Http404("Post does not exist")
+    
     if request.method == 'POST':
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
@@ -94,7 +106,11 @@ def update(request, post_id):
 # Delete a post
 @login_required
 def delete(request, post_id):
-    post = get_object_or_404(Post, id=post_id, user=request.user)
+    try:
+        post = get_object_or_404(Post, id=post_id, user=request.user)
+    except Post.DoesNotExist:
+        raise Http404("Post does not exist")
+    
     if request.method == 'POST':
         post.delete()
         return redirect('posts:index')
@@ -103,7 +119,11 @@ def delete(request, post_id):
 # Create a new comment
 @login_required
 def create_comment(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
+    try:
+        post = get_object_or_404(Post, id=post_id)
+    except Post.DoesNotExist:
+        raise Http404("Post does not exist")
+    
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -121,10 +141,32 @@ def create_comment(request, post_id):
         'title': 'Add Comment',
     })
 
+# Displaying a single comment
+@login_required
+def comment_detail(request, comment_id):
+    try:
+        comment = get_object_or_404(Comment, id=comment_id)
+    except Comment.DoesNotExist:
+        raise Http404("Comment does not exist")
+
+    context = {
+        'title': 'Comment Details',
+        'subtitle': 'Comment by {}'.format(comment.user.username),
+        'comment': comment,
+    }
+    return render(request, 'posts/comment_detail.html', context)
+
+
 # Update an existing comment
 @login_required
 def update_comment(request, comment_id):
-    comment = get_object_or_404(Comment, id=comment_id, user=request.user)
+    try:
+        comment = get_object_or_404(Comment, id=comment_id)
+        print(f"Fetched comment: {comment}")
+    except Comment.DoesNotExist:
+        print(f"No comment found with id: {comment_id}")
+        raise Http404("No Comment matches the given query.")
+    
     if request.method == 'POST':
         form = CommentForm(request.POST, instance=comment)
         if form.is_valid():
@@ -132,20 +174,59 @@ def update_comment(request, comment_id):
             return redirect('posts:detail', post_id=comment.post.id)
     else:
         form = CommentForm(instance=comment)
-    return render(request, 'posts/comment_form.html', {
-        'form': form,
-        'post': comment.post,
+    
+    context = {
         'title': 'Edit Comment',
-    })
+        'subtitle': 'Update your comment below:',
+        'form': form,
+        'post': comment.post
+    }
+    
+    return render(request, 'posts/comment_form.html', context)
 
 # Delete a comment
 @login_required
 def delete_comment(request, comment_id):
+    # Fetch the comment object or return a 404 error if it does not exist
     comment = get_object_or_404(Comment, id=comment_id)
+
+    # Check if the user has permission to delete the comment
     if request.user != comment.user and request.user != comment.post.user:
         return redirect('posts:detail', post_id=comment.post.id)
-    
+
+    # Handle POST request for deletion
     if request.method == 'POST':
         comment.delete()
+        # Redirect to the post detail page after deletion
         return redirect('posts:detail', post_id=comment.post.id)
-    return render(request, 'posts/confirm_delete.html', {'post': comment.post})
+
+    # Render the confirmation page if the request method is not POST
+    return render(request, 'posts/confirm_delete.html', {'post': comment.post, 'comment': comment})
+
+# Confirm delete for posts and comments
+@login_required
+def confirm_delete(request):
+    if request.method == 'POST':
+        post_id = request.POST.get('post_id')
+        comment_id = request.POST.get('comment_id')
+
+        if post_id:
+            post = get_object_or_404(Post, id=post_id)
+            post.delete()
+            return redirect('posts:index')
+        elif comment_id:
+            comment = get_object_or_404(Comment, id=comment_id)
+            comment.delete()
+            return redirect('posts:index')
+
+    # If GET request or missing IDs, show the confirmation page
+    post_id = request.GET.get('post_id')
+    comment_id = request.GET.get('comment_id')
+
+    context = {}
+    if post_id:
+        context['post'] = get_object_or_404(Post, id=post_id)
+    elif comment_id:
+        context['comment'] = get_object_or_404(Comment, id=comment_id)
+    
+    return render(request, 'posts/confirm_delete.html', context)

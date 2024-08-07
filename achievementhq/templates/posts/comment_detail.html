@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="py-5">
+    <div class="container px-5">
+        <div class="bg-light rounded-4 py-5 px-4 px-md-5">
+            <div class="text-center mb-2">
+                <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3">
+                    <i class="bi bi-chat-dots"></i>
+                </div>
+                <h1 class="fw-bolder">
+                    {% if request.user == comment.user %}
+                        Comment Details
+                    {% else %}
+                        Comment by {{ comment.user.username }}
+                    {% endif %}
+                </h1>
+                <p class="lead fw-normal text-muted mb-0">
+                    {% if request.user == comment.user %}
+                        You posted this comment on {{ comment.pub_date|date:"d M Y" }}
+                    {% else %}
+                        {{ comment.user.username }} posted this comment on {{ comment.pub_date|date:"d M Y" }}
+                    {% endif %}
+                </p>
+            </div>
+            <!-- Comment Detail Component -->
+            <div class="timeline">
+                <div class="timeline-container">
+                    <div class="timeline-launch">
+                        <div class="timeline-box">
+                            <div class="timeline-text">
+                                <p>{{ comment.comments_text }}</p>
+                            </div>
+                        </div>
+                        <div class="custom-buttons-group">
+                            <div class="custom-buttons-left">
+                                {% if request.user == comment.user %}
+                                    <!-- Edit Button -->
+                                    <a class="btn btn-primary btn-lg" href="{% url 'posts:update_comment' comment.id %}" role="button">Edit Comment</a>
+                                    <!-- Delete Button -->
+                                    <form method="post" action="{% url 'posts:delete_comment' comment.id %}">
+                                        {% csrf_token %}
+                                        <button class="btn btn-outline-danger btn-lg" type="submit">Delete Comment</button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                            <div class="custom-buttons-right">
+                                <!-- Back to Post Button -->
+                                <a class="btn btn-outline-secondary btn-lg" href="{% url 'posts:detail' comment.post.id %}" role="button">Back to Post</a>                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
