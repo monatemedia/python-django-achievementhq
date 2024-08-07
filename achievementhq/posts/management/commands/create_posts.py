@@ -1,6 +1,5 @@
 from django.core.management.base import BaseCommand
 from django.utils import timezone
-from datetime import timedelta
 from faker import Faker
 from django.contrib.auth.models import User
 from posts.models import Post
@@ -17,6 +16,8 @@ class Command(BaseCommand):
             num_posts = fake.random_int(min=0, max=20)
             for _ in range(num_posts):
                 pub_date = fake.date_time_between(start_date=user.date_joined, end_date='now')
+                # Ensure pub_date is timezone-aware
+                pub_date = timezone.make_aware(pub_date)
                 Post.objects.create(
                     user=user,
                     heading_text=fake.sentence(nb_words=6),

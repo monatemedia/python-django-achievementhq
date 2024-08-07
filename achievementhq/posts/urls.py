@@ -4,7 +4,11 @@ from . import views
 app_name = 'posts'
 
 urlpatterns = [
+    # User URLs
+    path('user_list/', views.user_list, name='user_list'),
+    # Post URLs
     path('', views.index, name='index'),
+    path('user/<int:user_id>/', views.index, name='user_index'),
     path('create/', views.create, name='create'),
     path('<int:post_id>/', views.detail, name='detail'),
     path('<int:post_id>/edit/', views.update, name='update'),

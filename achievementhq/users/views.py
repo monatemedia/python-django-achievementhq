@@ -5,6 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from .forms import UserRegisterForm  # Import your custom form
 from django.contrib.auth import logout as auth_logout
 
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)  # Use the custom form

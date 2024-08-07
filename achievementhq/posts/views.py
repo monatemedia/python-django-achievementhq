@@ -1,13 +1,38 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User  # Correct import for User model
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 from django.utils import timezone
 
+# List all users
+@login_required
+def user_list(request):
+    users = User.objects.all()
+    user_data = []
+
+    for user in users:
+        latest_post = Post.objects.filter(user=user).order_by('-pub_date').first()
+        user_data.append({
+            'id': user.id,  # Ensure user_id is included
+            'username': user.username,
+            'latest_post_title': latest_post.heading_text if latest_post else 'No posts',
+            'latest_post_message': latest_post.message_text if latest_post else 'No content available'
+        })
+
+    return render(request, 'posts/user_list.html', {'user_data': user_data})
+
 # List all posts
 @login_required
-def index(request):
-    posts = Post.objects.filter(user=request.user).order_by('-pub_date')
+def index(request, user_id=None):
+    if user_id:
+        # Get posts for the specified user
+        user = get_object_or_404(User, id=user_id)
+        posts = Post.objects.filter(user=user).order_by('-pub_date')
+    else:
+        # Get posts for the logged-in user
+        posts = Post.objects.filter(user=request.user).order_by('-pub_date')
+
     user_joined_date = request.user.date_joined
     user_name = request.user.username
     current_year = timezone.now().year

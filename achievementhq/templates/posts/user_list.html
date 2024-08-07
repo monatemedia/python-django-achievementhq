@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% for user in user_data %}
+        <div class="col-md-6 mb-4 d-flex align-items-stretch">
+            <div class="card w-100">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ user.latest_post_title }}</h5>
+                    <p class="card-text">{{ user.latest_post_message }}</p>
+                    <div class="mt-auto">
+                        <a href="{% url 'posts:user_index' user_id=user.id %}" class="btn btn-primary">View {{ user.username }}'s Posts</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
