@@ -129,59 +129,26 @@ _Below is an example of how you can instruct your audience on installing and set
 pipenv shell
 ```
 
-2. Install Django
+2.  Download repository
 
 ```sh
-pipenv install django
+git clone https://github.com/monatemedia/python-django-achievementhq.git
 ```
 
-3. Run initial migrations
+3. Change into directory app directory
 
 ```sh
-python manage.py migrate
+cd python-django-achievementhq/achievementhq
 ```
 
-4. Create admin user
+4. Run the demo app
 
 ```sh
-python manage.py createsuperuser
+python demo.py
 ```
 
-5. Inject Fake Data (Optional)
-
-```sh
-python manage.py shell
-```
-
-- Delete all users except for the admin user
-
-```sh
-python manage.py delete_non_admin_users
-```
-
-- Create Fake Users
-
-```sh
-python manage.py create_users
-```
-
-- Create Fake Posts
-
-```sh
-python manage.py create_posts
-```
-
-- Create Fake Comments
-
-```sh
-python manage.py create_comments
-```
-
-6. Run server on http: 127.0.0.1:8000 (ctrl+c to stop)
-
-```sh
-python manage.py runserver
-```
+Admin User name is "admin" and password is: PennantFernlikeAnnouncerSubsidy
+All other users passwords: DecreasePrototypeEasiestOxidant
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
