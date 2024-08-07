@@ -22,10 +22,13 @@
                         </div>
                     </div>
                     <div class="custom-buttons-group">
+                        <!-- Conditionally display edit and delete buttons -->
+                        {% if user.is_authenticated and post.user == user %}
                         <div class="custom-buttons-left">
                             <a class="btn btn-outline-primary" href="{% url 'posts:update' post.id %}" role="button">Edit</a>
                             <a class="btn btn-outline-secondary" href="{% url 'posts:delete' post.id %}" role="button">Delete</a>
                         </div>
+                        {% endif %}
                         <div class="custom-buttons-right">
                             <a class="btn btn-primary" href="{% url 'posts:index' %}" role="button">Back to list</a>
                         </div>
@@ -54,7 +57,7 @@
             {% if comments %}
             <!-- Comments Timeline -->
             <div class="text-center mb-2">
-                <h2 class="fw-bolder">Your Comments Timeline</h2>
+                <h2 class="fw-bolder">Comments Timeline</h2>
                 <p class="lead fw-normal text-muted mb-0">Click On A Comment To Discover More</p>
             </div>
 

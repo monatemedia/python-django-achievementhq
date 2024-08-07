@@ -26,21 +26,22 @@ def user_list(request):
 @login_required
 def index(request, user_id=None):
     if user_id:
-        # Get posts for the specified user
         user = get_object_or_404(User, id=user_id)
         posts = Post.objects.filter(user=user).order_by('-pub_date')
+        user_name = user.username
+        user_joined_date = user.date_joined
     else:
-        # Get posts for the logged-in user
         posts = Post.objects.filter(user=request.user).order_by('-pub_date')
+        user_name = request.user.username
+        user_joined_date = request.user.date_joined
 
-    user_joined_date = request.user.date_joined
-    user_name = request.user.username
-    current_year = timezone.now().year
     return render(request, 'posts/index.html', {
         'posts': posts,
         'user_joined_date': user_joined_date,
         'user_name': user_name,
+        'user_id': user_id,
     })
+
 
 # Create a new post
 @login_required
@@ -64,8 +65,9 @@ def create(request):
 # Read a specific post
 @login_required
 def detail(request, post_id):
-    post = get_object_or_404(Post, id=post_id, user=request.user)
-    comments = Comment.objects.filter(post=post)
+    post = get_object_or_404(Post, id=post_id)
+    comments = Comment.objects.filter(post=post).order_by('-pub_date')
+
     return render(request, 'posts/detail.html', {
         'post': post,
         'comments': comments,

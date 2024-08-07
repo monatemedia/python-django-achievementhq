@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
-<!-- Page content-->
 <section class="py-5">
     <div class="container px-5">
         <!-- Create new achievement panel-->
         <div class="bg-light rounded-4 py-5 px-4 px-md-5 mb-5">
             <div class="text-center mb-2">
                 <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i class="bi bi-award"></i></div>
-                <h1 class="fw-bolder">Welcome to Your Achievements</h1>
-                <p class="lead fw-normal text-muted mb-0">Track and celebrate your achievements here!</p>
+                <!-- Conditionally update the title and subtitle based on user_id -->
+                <h1 class="fw-bolder">{% if user_id %}{{ user_name }}'s Achievements{% else %}Welcome to Your Achievements{% endif %}</h1>
+                <p class="lead fw-normal text-muted mb-0">
+                    {% if user_id %}See {{ user_name }}'s latest achievements{% else %}Track and celebrate your achievements here!{% endif %}
+                </p>
             </div>
             <!-- Create new achievement button -->
             <div class="timeline">
@@ -32,7 +34,7 @@
     </div>
     <!-- Achievement Timeline -->
     <div class="text-center mb-2">
-        <h2 class="fw-bolder">Your Achievements Timeline</h2>
+        <h2 class="fw-bolder">Achievements Timeline</h2>
         <p class="lead fw-normal text-muted mb-0">Click On An Achievement Heading To Discover More</p>
     </div>
     <div class="timeline">
@@ -59,7 +61,6 @@
                                         {% endif %}
                                         {% for post in year.list %}
                                             {% if forloop.parentloop.counter0|add:forloop.counter0|divisibleby:2 %}
-                                                <!-- Div for timeline-left -->
                                                 <div class="row timeline-left">
                                                     <div class="col-md-6 d-md-none d-block">
                                                         <p class="timeline-date">
@@ -87,7 +88,6 @@
                                                     </div>
                                                 </div>
                                             {% else %}
-                                                <!-- Div for timeline-right -->
                                                 <div class="row timeline-right">
                                                     <div class="col-md-6">
                                                         <p class="timeline-date">

@@ -4,11 +4,8 @@ from . import views
 app_name = 'posts'
 
 urlpatterns = [
-    # User URLs
-    path('user_list/', views.user_list, name='user_list'),
     # Post URLs
     path('', views.index, name='index'),
-    path('user/<int:user_id>/', views.index, name='user_index'),
     path('create/', views.create, name='create'),
     path('<int:post_id>/', views.detail, name='detail'),
     path('<int:post_id>/edit/', views.update, name='update'),
@@ -17,4 +14,8 @@ urlpatterns = [
     path('posts/<int:post_id>/comments/create/', views.create_comment, name='create_comment'),
     path('comments/<int:comment_id>/edit/', views.update_comment, name='update_comment'),
     path('comments/<int:comment_id>/delete/', views.delete_comment, name='delete_comment'),
+    path('<int:post_id>/', views.detail, name='detail'),
+    # User URLs
+    path('user_list/', views.user_list, name='user_list'),
+    path('user/<int:user_id>/', views.index, name='user_index'),
 ]
