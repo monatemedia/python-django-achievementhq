@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
+{% load form_extras %}
 {% block content %}
 <section class="vh-100 bg-image"
   style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
-  <div class="mask d-flex align-items-center h-100 bg-gradient-primary-to-secondary">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
@@ -12,9 +13,18 @@
 
               <form method="post">
                 {% csrf_token %}
-                {{ form.as_p }} <!-- Render form fields -->
+                <div class="form-floating mb-3">
+                  {{ form.username.label_tag }}
+                  {{ form.username|add_class:"form-control" }}
+                  {{ form.username.errors }}
+                </div>
+                <div class="form-floating mb-3">
+                  {{ form.password.label_tag }}
+                  {{ form.password|add_class:"form-control" }}
+                  {{ form.password.errors }}
+                </div>
                 <div class="d-flex justify-content-center">
-                  <button type="submit" class="btn btn-primary btn-block btn-lg bg-gradient-primary-to-secondary text-body text-white-50">Log In</button>
+                  <button type="submit" class="btn btn-primary btn-block btn-lg text-body text-white-50">Log In</button>
                 </div>
 
                 <p class="text-center text-muted mt-5 mb-0">Don't have an account? <a href="{% url 'users:register' %}" class="fw-bold text-body"><u>Sign up here</u></a></p>
