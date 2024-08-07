@@ -142,7 +142,7 @@ pipenv shell
 4. Change into main directory
 
 ```sh
-cd python-django-achievementhq
+cd achievementhq
 ```
 
 5. Run the demo app
