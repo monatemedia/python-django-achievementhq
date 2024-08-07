@@ -2,14 +2,34 @@
 {% block content %}
 <section class="py-5">
     <div class="container px-5">
-        <!-- Create new achievement panel-->
+        <!-- Create new achievement panel -->
         <div class="bg-light rounded-4 py-5 px-4 px-md-5 mb-5">
             <div class="text-center mb-2">
-                <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i class="bi bi-award"></i></div>
+                <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3">
+                    <i class="bi bi-award"></i>
+                </div>
                 <!-- Conditionally update the title and subtitle based on user_id -->
-                <h1 class="fw-bolder">{% if user_id %}{{ user_name }}'s Achievements{% else %}Welcome to Your Achievements{% endif %}</h1>
+                <h1 class="fw-bolder">
+                    {% if user_id %}
+                        {% if user_id == request.user.id %}
+                            Welcome to Your Achievements
+                        {% else %}
+                            {{ user_name }}'s Achievements
+                        {% endif %}
+                    {% else %}
+                        Welcome to Your Achievements
+                    {% endif %}
+                </h1>
                 <p class="lead fw-normal text-muted mb-0">
-                    {% if user_id %}See {{ user_name }}'s latest achievements{% else %}Track and celebrate your achievements here!{% endif %}
+                    {% if user_id %}
+                        {% if user_id == request.user.id %}
+                            Track and celebrate your achievements here!
+                        {% else %}
+                            See {{ user_name }}'s latest achievements
+                        {% endif %}
+                    {% else %}
+                        Track and celebrate your achievements here!
+                    {% endif %}
                 </p>
             </div>
             <!-- Create new achievement button -->
@@ -73,7 +93,9 @@
                                                                 <i class="fa fa-award"></i>
                                                             </div>
                                                             <div class="timeline-text">
-                                                                <a href="{% url 'posts:detail' post.id %}"><h3>{{ post.heading_text }}</h3></a>
+                                                                <a href="{% url 'posts:detail' post.id %}">
+                                                                    <h3>{{ post.heading_text }}</h3>
+                                                                </a>
                                                                 <p>{{ post.message_text }}</p>
                                                             </div>
                                                             <div class="timeline-icon d-md-block d-none">
@@ -100,7 +122,9 @@
                                                                 <i class="fa fa-award"></i>
                                                             </div>
                                                             <div class="timeline-text">
-                                                                <a href="{% url 'posts:detail' post.id %}"><h3>{{ post.heading_text }}</h3></a>
+                                                                <a href="{% url 'posts:detail' post.id %}">
+                                                                    <h3>{{ post.heading_text }}</h3>
+                                                                </a>
                                                                 <p>{{ post.message_text }}</p>
                                                             </div>
                                                         </div>

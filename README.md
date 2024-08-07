@@ -213,6 +213,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
   - [ ] Allow Users To Comment On Posts
   - [ ] Allow Authors to Delete Comments
 - [ ] Turn Timeline into Partial
+- [ ] Add alerts for all actions
 - [ ] Add Error Pages Template
 - [ ] Switch From Broswer Alerts To Bootstrap Alerts
 - [ ] Add Emails App

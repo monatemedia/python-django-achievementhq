@@ -23,10 +23,9 @@ urlpatterns = [
     path('', include('pages.urls')),
     # Include polls routes
     path('polls/', include('polls.urls')),
-    # Include users routes
-    path('users/', include('users.urls')),
+    # Include users routes for login, register, and logout
+    path('', include('users.urls')),
     # Include posts routes
     path('posts/', include('posts.urls')),
-    
     path('admin/', admin.site.urls),
 ]
