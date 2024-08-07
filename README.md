@@ -127,10 +127,10 @@ The project requires Python 3 and pipenv to be installed on your local machine.
 git clone https://github.com/monatemedia/python-django-achievementhq.git
 ```
 
-4. Change into directory app directory
+2. Change into main directory
 
 ```sh
-cd python-django-achievementhq/achievementhq
+cd python-django-achievementhq
 ```
 
 3. Create Venv
@@ -139,7 +139,13 @@ cd python-django-achievementhq/achievementhq
 pipenv shell
 ```
 
-4. Run the demo app
+4. Change into main directory
+
+```sh
+cd python-django-achievementhq
+```
+
+5. Run the demo app
 
 ```sh
 python demo.py
