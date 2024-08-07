@@ -24,7 +24,7 @@ def login(request):
             user = form.get_user()
             auth_login(request, user)
             messages.success(request, f'Welcome {user.username}!!')
-            return redirect('polls:user_list')
+            return redirect('posts:user_list')
         else:
             messages.info(request, 'Invalid username or password.')
     else:

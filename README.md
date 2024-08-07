@@ -212,7 +212,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [ ] Add Comments App
   - [ ] Allow Users To Comment On Posts
   - [ ] Allow Authors to Delete Comments
-- [ ] Use Django’s URL Template Tag To Make Navigation Links Dynamic
+- [ ] Turn Timeline into Partial
 - [ ] Add Error Pages Template
 - [ ] Switch From Broswer Alerts To Bootstrap Alerts
 - [ ] Add Emails App
