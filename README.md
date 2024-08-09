@@ -139,7 +139,7 @@ cd python-django-achievementhq
 pipenv shell
 ```
 
-4. Change into main directory
+4. Change into app directory
 
 ```sh
 cd achievementhq
@@ -178,18 +178,14 @@ _For more examples, please refer to the [Documentation](https://example.com)_
   - [ ] Add Log In Page
 - [ ] Add Posts App
   - [ ] Add Posts CRUD
-  - [ ] Add Posts Timeline
+  - [x] Add Posts Timeline
 - [ ] Add Protected Routes
 - [ ] Add Comments App
-  - [ ] Allow Users To Comment On Posts
+  - [x] Allow Users To Comment On Posts
   - [ ] Allow Authors to Delete Comments
-- [ ] Turn Timeline into Partial
 - [ ] Add alerts for all actions
 - [ ] Add Error Pages Template
 - [ ] Switch From Broswer Alerts To Bootstrap Alerts
-- [ ] Add Emails App
-  - [ ] Send Registration And Password Reset Email
-  - [ ] Send Marketing Emails
 
 See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
 
