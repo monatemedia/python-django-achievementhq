@@ -1,4 +1,14 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if user_id %}
+        {{ user_name }}'s Achievements
+    {% else %}
+        Your Achievements
+    {% endif %}
+{% endblock %}
+
 {% block content %}
 <section class="py-5">
     <div class="container px-5">
