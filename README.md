@@ -36,16 +36,16 @@
   <h3 align="center">AchievementHQ-README</h3>
 
   <p align="center">
-    We highly recommend keeping track of all your achievements, no matter how big or small they are! 🎯 Achievement HQ is a project for you and your friends to track and celebrate each other's achievements!
+    We highly recommend keeping track of all your achievements, no matter how big or small they are! 🎯 Achievement HQ is a social network for you and your friends to track and celebrate each other's achievements!
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    <a href="mailto:edward@monatemedia.com?subject=Bug%20Report%20for%20AchievementHQ&body=**Bug%20Description:**%0D%0A%0D%0A**Steps%20to%20Reproduce:**%0D%0A1.%20Step%201%0D%0A2.%20Step%202%0D%0A3.%20Step%203%0D%0A%0D%0A**Expected%20Behavior:**%0D%0A%0D%0A**Actual%20Behavior:**%0D%0A%0D%0A**Screenshots%20or%20Error%20Messages:**%0D%0A%0D%0A**Browser%20and%20OS%20(Version):**%0D%0A%0D%0A**Additional%20Information:**%0D%0A%0D%0A">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+    <a href="mailto:edward@monatemedia.com?subject=Feature%20Request%20for%20AchievementHQ&body=**Feature%20Description:**%0D%0A%0D%0A**Why%20is%20this%20feature%20important%3F:**%0D%0A%0D%0A**How%20would%20you%20like%20it%20to%20work%3F:**%0D%0A%0D%0A**Additional%20Comments:**%0D%0A%0D%0A">Request Feature</a>
   </p>
 </div>
 
@@ -108,7 +108,7 @@ Python Django and bootstrap
 
 ## Getting Started
 
-These are the instructions on setting up your project locally. To get a local copy up and running follow these simple example steps.
+To get a copy set up and running on your local environment follow these simple steps.
 
 ### Prerequisites
 
@@ -151,8 +151,8 @@ cd achievementhq
 python demo.py
 ```
 
-Admin User name is "admin" and password is: PennantFernlikeAnnouncerSubsidy
-All other users passwords: DecreasePrototypeEasiestOxidant
+- Admin User name is "admin" and password is PennantFernlikeAnnouncerSubsidy
+- All other users passwords are DecreasePrototypeEasiestOxidant
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
