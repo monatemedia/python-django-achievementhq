@@ -15,7 +15,7 @@ All Achievers!
                     <h5 class="card-title">{{ user.latest_post_title }}</h5>
                     <p class="card-text">{{ user.latest_post_message }}</p>
                     <div class="mt-auto">
-                        <a href="{% url 'posts:user_index' user_id=user.id %}" class="btn btn-primary">View {{ user.username }}'s Posts</a>
+                        <a href="{% url 'posts:user_index' user_id=user.id %}" class="btn btn-outline-primary px-4 py-3">View {{ user.username }}'s Posts</a>
                     </div>
                 </div>
             </div>

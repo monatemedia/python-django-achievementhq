@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Confirm Delete
+{% endblock %}
 
 {% block content %}
 <!-- Page content-->
@@ -27,11 +32,21 @@
                                 <div class="custom-buttons-group">
                                     <div class="custom-buttons-left">
                                         <!-- Confirm Button-->
-                                        <div class="d-grid"><button class="btn btn-danger btn-lg" type="submit">Confirm</button></div>
+                                        <div class="d-grid">
+                                            <button class="btn btn-danger px-4 py-3" type="submit">
+                                                <div class="d-inline-block bi bi-trash me-2"></div>
+                                                Confirm
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="custom-buttons-right">
                                         <!-- Cancel Button-->
-                                        <div class="d-grid"><a class="btn btn-outline-secondary btn-lg" href="{% url 'posts:index' %}" role="button">Cancel</a></div>
+                                        <div class="d-grid">
+                                            <a class="btn btn-outline-dark px-4 py-3" href="{% url 'posts:index' %}" role="button">
+                                                <div class="d-inline-block bi bi-x-lg me-2"></div>
+                                                Cancel
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
