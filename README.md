@@ -97,7 +97,7 @@ Thank you for your interest in AchievementHQ! We look forward to celebrating you
 
 ### Built With
 
-Python Django and bootstrap
+Python Django and Bootstrap
 
 - [![Django][Django]][Django-url]
 - [![Bootstrap][Bootstrap.com]][Bootstrap-url]
@@ -220,7 +220,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Edward Baitsewe - [@LinkedIn](https://www.linkedin.com/in/edwardbaitsewe/) - edward@monatemedia.com
+Edward Baitsewe - [@LinkedIn](https://www.linkedin.com/in/edwardbaitsewe/) - [Website](https://www.monatemedia.com/)
 
 Project Link: [https://github.com/monatemedia/python-django-achievementhq](https://github.com/monatemedia/python-django-achievementhq)
 

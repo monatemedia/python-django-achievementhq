@@ -1,14 +1,4 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block title %}
-    {% if user == post.user %}
-        One Of Your Achievements
-    {% else %}
-        One Of {{ post.user.username }}'s Achievements
-    {% endif %}
-{% endblock %}
-
+{% extends "base.html" %}
 {% block content %}
 <!-- Page content -->
 <div class="container px-5">
@@ -18,9 +8,8 @@
             <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3">
                 <i class="bi bi-award"></i>
             </div>
-            <h1 class="fw-bolder">
-                {% if user == post.user %}
-                    One Of Your Achievements
+            <h1 class="fw-bolder">{% if user == post.user %}
+                One Of Your Achievements
                 {% else %}
                     One Of {{ post.user.username }}'s Achievements
                 {% endif %}
@@ -33,7 +22,6 @@
                 {% endif %}
             </p>
         </div>
-
         <!-- Detail Speech Bubble -->
         <div class="timeline">
             <div class="timeline-container">
@@ -45,31 +33,21 @@
                         </div>
                     </div>
                     <div class="custom-buttons-group">
-                        
                         <!-- Conditionally display edit and delete buttons -->
                         {% if user.is_authenticated and post.user == user %}
                         <div class="custom-buttons-left">
-                            <a class="btn btn-outline-primary px-4 py-3" href="{% url 'posts:update' post.id %}" role="button">
-                                <div class="d-inline-block bi bi-pen me-2"></div>
-                                Edit
-                            </a>
-                            <a class="btn btn-outline-danger px-4 py-3" href="{% url 'posts:delete' post.id %}" role="button">
-                                <div class="d-inline-block bi bi-trash me-2"></div>
-                                Delete</a>
+                            <a class="btn btn-outline-primary" href="{% url 'posts:update' post.id %}" role="button">Edit</a>
+                            <a class="btn btn-outline-secondary" href="{% url 'posts:delete' post.id %}" role="button">Delete</a>
                         </div>
                         {% endif %}
                         <div class="custom-buttons-right">
-                            <div class="d-grid">
-                                <!-- Back Button -->
-                                <a class="btn btn-primary px-4 py-3" href="{% url 'posts:user_index' post.user.id %}" role="button">
-                                    <div class="d-inline-block bi bi-backspace-fill me-2"></div>
-                                    {% if user == post.user %}
-                                        Go Back To Your Achievements
-                                    {% else %}
-                                        Go Back To {{ post.user.username }}'s Achievements
-                                    {% endif %}
-                                </a>
-                            </div>
+                            <a class="btn btn-primary" href="{% url 'posts:user_index' post.user.id %}" role="button">
+                                {% if user == post.user %}
+                                    Go Back To Your Achievements
+                                {% else %}
+                                    Go Back To {{ post.user.username }}'s Achievements
+                                {% endif %}
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -77,7 +55,7 @@
         </div>
     </div>
 
-    <!-- Container for Comments Button -->
+    <!-- Container for Comments -->
     <div class="row gx-4 justify-content-center mt-5">
         <div class="col-lg-11 col-xl-11 col-xxl-8">
             <div class="d-flex align-items-center justify-content-between my-4">
@@ -106,59 +84,77 @@
                         <p>Now</p>
                     </div>
                     <div class="timeline-continue">
-                        {% regroup comments|dictsortreversed:"pub_date" by pub_date.year as year_list %}
-                        {% for year in year_list %}
-                        {% if not forloop.first %}
-                        <div class="timeline-year">
-                            <p>{{ year.grouper }}</p>
-                        </div>
+                        {% if comments %}
+                            {% regroup comments by pub_date.year as year_list %}
+                            {% with counter=0 %}
+                                {% for year in year_list %}
+                                    {% if not forloop.first %}
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="timeline-year">
+                                                    <p>{{ year.grouper }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    {% for comment in year.list %}
+                                        {% if forloop.parentloop.counter0|add:forloop.counter0|divisibleby:2 %}
+                                            <div class="row timeline-left">
+                                                <div class="col-md-6 d-md-none d-block">
+                                                    <p class="timeline-date">
+                                                        {{ comment.pub_date|date:"d M Y" }}
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="timeline-box">
+                                                        <div class="timeline-icon d-md-none d-block">
+                                                            <i class="fa fa-comment"></i>
+                                                        </div>
+                                                        <div class="timeline-text">
+                                                            <a href="{% url 'posts:comment_detail' comment.id %}">
+                                                                <h3>{{ comment.comments_text }}</h3>
+                                                            </a>
+                                                            <p> - <a href="{% url 'posts:user_index' comment.user.id %}">{{ comment.user.username }}</a></p>
+                                                        </div>
+                                                        <div class="timeline-icon d-md-block d-none">
+                                                            <i class="fa fa-comment"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 d-md-block d-none">
+                                                    <p class="timeline-date">
+                                                        {{ comment.pub_date|date:"d M Y" }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="row timeline-right">
+                                                <div class="col-md-6">
+                                                    <p class="timeline-date">
+                                                        {{ comment.pub_date|date:"d M Y" }}
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="timeline-box">
+                                                        <div class="timeline-icon">
+                                                            <i class="fa fa-comment"></i>
+                                                        </div>
+                                                        <div class="timeline-text">
+                                                            <a href="{% url 'posts:comment_detail' comment.id %}">
+                                                                <h3>{{ comment.comments_text }}</h3>
+                                                            </a>
+                                                            <p> - <a href="{% url 'posts:user_index' comment.user.id %}">{{ comment.user.username }}</a></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            {% endwith %}
+                        {% else %}
+                            <p>No comments available.</p>
                         {% endif %}
-                        {% for comment in year.list %}
-                        <div class="row {% cycle 'timeline-left' 'timeline-right' %}">
-                            {% if forloop.counter0|divisibleby:2 %}
-                            <div class="col-md-6 d-md-none d-block">
-                                <p class="timeline-date">{{ comment.pub_date|date:"d M Y" }}</p>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="timeline-box">
-                                    <div class="timeline-icon d-md-none d-block">
-                                        <i class="fa fa-comment"></i>
-                                    </div>
-                                    <div class="timeline-text">
-                                        <a href="{% url 'posts:comment_detail' comment.id %}">
-                                            <h3>{{ comment.comments_text }}</h3>
-                                        </a>
-                                        <p> - <a href="{% url 'posts:user_index' comment.user.id %}">{{ comment.user.username }}</a></p>
-                                    </div>
-                                    <div class="timeline-icon d-md-block d-none">
-                                        <i class="fa fa-comment"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 d-md-block d-none">
-                                <p class="timeline-date">{{ comment.pub_date|date:"d M Y" }}</p>
-                            </div>
-                            {% else %}
-                            <div class="col-md-6">
-                                <p class="timeline-date">{{ comment.pub_date|date:"d M Y" }}</p>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="timeline-box">
-                                    <div class="timeline-icon">
-                                        <i class="fa fa-comment"></i>
-                                    </div>
-                                    <div class="timeline-text">
-                                        <a href="{% url 'posts:comment_detail' comment.id %}">
-                                            <h3>{{ comment.comments_text }}</h3>
-                                        </a>
-                                        <p> - <a href="{% url 'posts:user_index' comment.user.id %}">{{ comment.user.username }}</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endif %}
-                        </div>
-                        {% endfor %}
-                        {% endfor %}
                     </div>
                     <div class="timeline-start">
                         <p>Post</p>
@@ -172,6 +168,7 @@
                         </div>
                     </div>
                 </div>
+                
             </div>
             {% else %}
             <p>No comments yet.</p>
