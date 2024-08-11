@@ -12,6 +12,7 @@
 {% block content %}
 <!-- Page content -->
 <div class="container px-5">
+
     <!-- Detail form -->
     <div class="bg-light rounded-4 py-5 px-4 px-md-5">
         <div class="text-center mb-2">
@@ -44,34 +45,33 @@
                             <p>{{ post.message_text }}</p>
                         </div>
                     </div>
-                    <div class="custom-buttons-group">
-                        
+                    <div class="row gx-4 justify-content-between mt-5">
                         <!-- Conditionally display edit and delete buttons -->
                         {% if user.is_authenticated and post.user == user %}
-                        <div class="custom-buttons-left">
-                            <a class="btn btn-outline-primary px-4 py-3" href="{% url 'posts:update' post.id %}" role="button">
+                        <div class="col-auto d-flex align-items-center">
+                            <a class="btn btn-outline-primary px-4 py-3 me-3" href="{% url 'posts:update' post.id %}" role="button">
                                 <div class="d-inline-block bi bi-pen me-2"></div>
                                 Edit
                             </a>
                             <a class="btn btn-outline-danger px-4 py-3" href="{% url 'posts:delete' post.id %}" role="button">
                                 <div class="d-inline-block bi bi-trash me-2"></div>
-                                Delete</a>
+                                Delete
+                            </a>
                         </div>
                         {% endif %}
-                        <div class="custom-buttons-right">
-                            <div class="d-grid">
-                                <!-- Back Button -->
-                                <a class="btn btn-primary px-4 py-3" href="{% url 'posts:user_index' post.user.id %}" role="button">
-                                    <div class="d-inline-block bi bi-backspace-fill me-2"></div>
-                                    {% if user == post.user %}
-                                        Go Back To Your Achievements
-                                    {% else %}
-                                        Go Back To {{ post.user.username }}'s Achievements
-                                    {% endif %}
-                                </a>
-                            </div>
+                        <div class="col-auto d-flex align-items-center ms-auto">
+                            <!-- Back Button -->
+                            <a class="btn btn-primary px-4 py-3" href="{% url 'posts:user_index' post.user.id %}" role="button">
+                                <div class="d-inline-block bi bi-backspace-fill me-2"></div>
+                                {% if user == post.user %}
+                                    Go Back To Your Achievements
+                                {% else %}
+                                    Go Back To {{ post.user.username }}'s Achievements
+                                {% endif %}
+                            </a>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>

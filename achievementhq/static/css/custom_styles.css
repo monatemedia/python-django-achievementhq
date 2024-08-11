@@ -1,23 +1,8 @@
-.custom-buttons-group {
-    display: flex;
-    justify-content: space-between; /* Distribute space between the button groups */
-    align-items: center; /* Vertically center items */
-    margin-top: 20px; /* Space above the button group */
-}
-
-.custom-buttons-left, .custom-buttons-right {
-    display: flex;
-    gap: 5px; /* Space between buttons within each group */
-}
-
-.custom-buttons-left a, .custom-buttons-right a {
-    margin: 0 3px; /* Reduced horizontal margin for individual buttons */
-}
-
 .custom-textarea {
     height: calc(3em * 10); /* 1.5em is the line-height, adjust as necessary */
     resize: vertical; /* Allow resizing only vertically */
 }
+
 
 
 

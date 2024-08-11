@@ -29,26 +29,28 @@ Confirm Delete
                                 {% csrf_token %}
                                 <input type="hidden" name="post_id" value="{{ post.id }}">
                                 <input type="hidden" name="comment_id" value="{{ comment.id }}">
-                                <div class="custom-buttons-group">
-                                    <div class="custom-buttons-left">
+                                <div class="row gx-4 mt-5">
+                                    <div class="col d-flex justify-content-start">
                                         <!-- Confirm Button -->
-                                        <div class="d-grid">
+                                        <form method="post" action="{% url 'posts:confirm_delete' %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="post_id" value="{{ post.id }}">
+                                            <input type="hidden" name="comment_id" value="{{ comment.id }}">
                                             <button class="btn btn-danger px-4 py-3" type="submit">
                                                 <div class="d-inline-block bi bi-trash me-2"></div>
                                                 Confirm
                                             </button>
-                                        </div>
+                                        </form>
                                     </div>
-                                    <div class="custom-buttons-right">
+                                    <div class="col d-flex justify-content-end">
                                         <!-- Cancel Button -->
-                                        <div class="d-grid">
-                                            <a class="btn btn-outline-dark px-4 py-3" href="{% if post %}{% url 'posts:index' %}{% else %}{% url 'posts:detail' post_id %}{% endif %}" role="button">
-                                                <div class="d-inline-block bi bi-x-lg me-2"></div>
-                                                Cancel
-                                            </a>
-                                        </div>
+                                        <a class="btn btn-outline-dark px-4 py-3" href="{% if post %}{% url 'posts:index' %}{% else %}{% url 'posts:detail' post_id %}{% endif %}" role="button">
+                                            <div class="d-inline-block bi bi-x-lg me-2"></div>
+                                            Cancel
+                                        </a>
                                     </div>
                                 </div>
+                                
                             </form>
                         </div>
                     </div>
