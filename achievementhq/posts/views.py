@@ -6,7 +6,7 @@ from .models import Post, Comment
 from .forms import PostForm, CommentForm
 from django.utils import timezone
 
-# List all users
+# List all users by latest post
 @login_required
 def user_list(request):
     users = User.objects.all()
@@ -15,11 +15,15 @@ def user_list(request):
     for user in users:
         latest_post = Post.objects.filter(user=user).order_by('-pub_date').first()
         user_data.append({
-            'id': user.id,  # Ensure user_id is included
+            'id': user.id,
             'username': user.username,
             'latest_post_title': latest_post.heading_text if latest_post else 'No posts',
-            'latest_post_message': latest_post.message_text if latest_post else 'No content available'
+            'latest_post_message': latest_post.message_text if latest_post else 'No content available',
+            'latest_post_date': latest_post.pub_date if latest_post else timezone.make_aware(timezone.datetime.min)
         })
+
+    # Sort user_data by latest_post_date in descending order
+    user_data.sort(key=lambda x: x['latest_post_date'], reverse=True)
 
     return render(request, 'posts/user_list.html', {'user_data': user_data})
 
@@ -216,8 +220,9 @@ def confirm_delete(request):
             return redirect('posts:index')
         elif comment_id:
             comment = get_object_or_404(Comment, id=comment_id)
+            post_id = comment.post.id  # Get the post ID related to the comment
             comment.delete()
-            return redirect('posts:index')
+            return redirect('posts:detail', post_id=post_id)  # Redirect to the post detail page
 
     # If GET request or missing IDs, show the confirmation page
     post_id = request.GET.get('post_id')
@@ -228,5 +233,6 @@ def confirm_delete(request):
         context['post'] = get_object_or_404(Post, id=post_id)
     elif comment_id:
         context['comment'] = get_object_or_404(Comment, id=comment_id)
-    
+        context['post_id'] = context['comment'].post.id  # Pass the post ID for cancellation
+
     return render(request, 'posts/confirm_delete.html', context)

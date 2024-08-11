@@ -1,15 +1,27 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if user == post.user %}
+        One Of Your Achievements
+    {% else %}
+        One Of {{ post.user.username }}'s Achievements
+    {% endif %}
+{% endblock %}
+
 {% block content %}
 <!-- Page content -->
 <div class="container px-5">
+
     <!-- Detail form -->
     <div class="bg-light rounded-4 py-5 px-4 px-md-5">
         <div class="text-center mb-2">
             <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3">
                 <i class="bi bi-award"></i>
             </div>
-            <h1 class="fw-bolder">{% if user == post.user %}
-                One Of Your Achievements
+            <h1 class="fw-bolder">
+                {% if user == post.user %}
+                    One Of Your Achievements
                 {% else %}
                     One Of {{ post.user.username }}'s Achievements
                 {% endif %}
@@ -22,6 +34,7 @@
                 {% endif %}
             </p>
         </div>
+
         <!-- Detail Speech Bubble -->
         <div class="timeline">
             <div class="timeline-container">
@@ -32,16 +45,24 @@
                             <p>{{ post.message_text }}</p>
                         </div>
                     </div>
-                    <div class="custom-buttons-group">
+                    <div class="row gx-4 justify-content-between mt-5">
                         <!-- Conditionally display edit and delete buttons -->
                         {% if user.is_authenticated and post.user == user %}
-                        <div class="custom-buttons-left">
-                            <a class="btn btn-outline-primary" href="{% url 'posts:update' post.id %}" role="button">Edit</a>
-                            <a class="btn btn-outline-secondary" href="{% url 'posts:delete' post.id %}" role="button">Delete</a>
+                        <div class="col-auto d-flex align-items-center">
+                            <a class="btn btn-outline-primary px-4 py-3 me-3" href="{% url 'posts:update' post.id %}" role="button">
+                                <div class="d-inline-block bi bi-pen me-2"></div>
+                                Edit
+                            </a>
+                            <a class="btn btn-outline-danger px-4 py-3" href="{% url 'posts:delete' post.id %}" role="button">
+                                <div class="d-inline-block bi bi-trash me-2"></div>
+                                Delete
+                            </a>
                         </div>
                         {% endif %}
-                        <div class="custom-buttons-right">
-                            <a class="btn btn-primary" href="{% url 'posts:user_index' post.user.id %}" role="button">
+                        <div class="col-auto d-flex align-items-center ms-auto">
+                            <!-- Back Button -->
+                            <a class="btn btn-primary px-4 py-3" href="{% url 'posts:user_index' post.user.id %}" role="button">
+                                <div class="d-inline-block bi bi-backspace-fill me-2"></div>
                                 {% if user == post.user %}
                                     Go Back To Your Achievements
                                 {% else %}
@@ -50,12 +71,13 @@
                             </a>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Container for Comments -->
+    <!-- Container for Comments Button -->
     <div class="row gx-4 justify-content-center mt-5">
         <div class="col-lg-11 col-xl-11 col-xxl-8">
             <div class="d-flex align-items-center justify-content-between my-4">

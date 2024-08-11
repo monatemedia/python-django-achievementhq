@@ -77,26 +77,22 @@
                                                     {% endif %}
                                                 </div>
                                             </div>
-                                            <div class="custom-buttons-group">
-                                                <div class="custom-buttons-left">
-                                                    <!-- Submit Button-->
-                                                    <div class="d-grid">
-                                                        <button class="btn btn-primary px-4 py-3" type="submit">
-                                                            <div class="d-inline-block bi bi-save2 me-2"></div>
-                                                            Save
-                                                        </button>
-                                                    </div>
+                                            <div class="row gx-4 mt-5">
+                                                <div class="col d-flex justify-content-start">
+                                                    <!-- Submit Button -->
+                                                    <button class="btn btn-primary px-4 py-3" type="submit">
+                                                        <div class="d-inline-block bi bi-save2 me-2"></div>
+                                                        Save
+                                                    </button>
                                                 </div>
-                                                <div class="custom-buttons-right">
-                                                    <!-- Back to List Button-->
-                                                    <div class="d-grid">
-                                                        <a class="btn btn-outline-dark px-4 py-3" href="{% url 'posts:index' %}" role="button">
-                                                            <div class="d-inline-block bi bi-backspace"></div>
-                                                            Back to List
-                                                        </a>
-                                                    </div>
+                                                <div class="col d-flex justify-content-end">
+                                                    <!-- Back to List Button -->
+                                                    <a class="btn btn-outline-dark px-4 py-3" href="{% url 'posts:index' %}" role="button">
+                                                        <div class="d-inline-block bi bi-backspace me-2"></div>
+                                                        Achievements
+                                                    </a>
                                                 </div>
-                                            </div>
+                                            </div>                                            
                                         </form>
                                     </div>
                                 </div>

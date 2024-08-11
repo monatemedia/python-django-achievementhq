@@ -46,20 +46,22 @@ Edit Comment
                                                         {% endif %}
                                                     </div>
                                                 </div>
-                                                <div class="custom-buttons-group">
-                                                    <div class="custom-buttons-left">
-                                                        <!-- Submit Button-->
-                                                        <div class="d-grid">
-                                                            <button class="btn btn-primary btn-lg" type="submit">Save</button>
-                                                        </div>
+                                                <div class="row gx-4 mt-5">
+                                                    <div class="col d-flex justify-content-start">
+                                                        <!-- Submit Button -->
+                                                        <button class="btn btn-primary btn-lg me-2" type="submit">
+                                                            <div class="d-inline-block bi bi-save2 me-2"></div>
+                                                            Save
+                                                        </button>
                                                     </div>
-                                                    <div class="custom-buttons-right">
-                                                        <!-- Back to Post Button-->
-                                                        <div class="d-grid">
-                                                            <a class="btn btn-outline-secondary btn-lg" href="{% url 'posts:detail' post.id %}" role="button">Back to Post</a>
-                                                        </div>
+                                                    <div class="col d-flex justify-content-end">
+                                                        <!-- Back to Post Button -->
+                                                        <a class="btn btn-outline-dark px-4 py-3" href="{% url 'posts:detail' post.id %}" role="button">
+                                                            <div class="d-inline-block bi bi-backspace me-2"></div>
+                                                            Back to Post
+                                                        </a>
                                                     </div>
-                                                </div>
+                                                </div>                                                
                                             </form>
                                         {% else %}
                                             <div class="timeline-box">
