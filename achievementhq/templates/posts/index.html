@@ -18,6 +18,7 @@
                 <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3">
                     <i class="bi bi-award"></i>
                 </div>
+
                 <!-- Conditionally update the title and subtitle based on user_id -->
                 <h1 class="fw-bolder">
                     {% if user_id %}
@@ -42,6 +43,7 @@
                     {% endif %}
                 </p>
             </div>
+            
             <!-- Create new achievement button -->
             {% if user_owns_posts %}
             <div class="timeline">
@@ -52,7 +54,7 @@
                                 <div class="row gx-5 justify-content-center">
                                     <div class="col-lg-8 col-xl-6">
                                         <div class="d-grid">
-                                            <a class="btn btn-primary btn-lg" href="{% url 'posts:create' %}" role="button">Create New Achievement</a>
+                                            <a class="btn btn-primary px-4 py-3" href="{% url 'posts:create' %}" role="button">Create New Achievement</a>
                                         </div>
                                     </div>
                                 </div>
