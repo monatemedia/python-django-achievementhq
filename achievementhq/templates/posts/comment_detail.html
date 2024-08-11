@@ -41,17 +41,26 @@ Comment Details
                             <div class="custom-buttons-left">
                                 {% if request.user == comment.user %}
                                     <!-- Edit Button -->
-                                    <a class="btn btn-primary btn-lg" href="{% url 'posts:update_comment' comment.id %}" role="button">Edit Comment</a>
+                                    <a class="btn btn-outline-primary px-4 py-3" href="{% url 'posts:update_comment' comment.id %}" role="button">
+                                        <div class="d-inline-block bi bi-pen me-2"></div>
+                                        Edit Comment
+                                    </a>
                                     <!-- Delete Button -->
-                                    <form method="post" action="{% url 'posts:delete_comment' comment.id %}">
-                                        {% csrf_token %}
-                                        <button class="btn btn-outline-danger btn-lg" type="submit">Delete Comment</button>
+                                    <form method="get" action="{% url 'posts:confirm_delete' %}">
+                                        <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                        <button class="btn btn-outline-danger px-4 py-3" type="submit">
+                                            <div class="d-inline-block bi bi-trash me-2"></div>
+                                            Delete Comment
+                                        </button>
                                     </form>
                                 {% endif %}
                             </div>
                             <div class="custom-buttons-right">
                                 <!-- Back to Post Button -->
-                                <a class="btn btn-outline-secondary btn-lg" href="{% url 'posts:detail' comment.post.id %}" role="button">Back to Post</a>                              
+                                <a class="btn btn-primary px-4 py-3" href="{% url 'posts:detail' comment.post.id %}" role="button">
+                                    <div class="d-inline-block bi bi-backspace-fill me-2"></div>
+                                    Back to Post
+                                </a>                              
                             </div>
                         </div>
                     </div>

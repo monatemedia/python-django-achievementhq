@@ -216,8 +216,9 @@ def confirm_delete(request):
             return redirect('posts:index')
         elif comment_id:
             comment = get_object_or_404(Comment, id=comment_id)
+            post_id = comment.post.id  # Get the post ID related to the comment
             comment.delete()
-            return redirect('posts:index')
+            return redirect('posts:detail', post_id=post_id)  # Redirect to the post detail page
 
     # If GET request or missing IDs, show the confirmation page
     post_id = request.GET.get('post_id')
@@ -228,5 +229,6 @@ def confirm_delete(request):
         context['post'] = get_object_or_404(Post, id=post_id)
     elif comment_id:
         context['comment'] = get_object_or_404(Comment, id=comment_id)
-    
+        context['post_id'] = context['comment'].post.id  # Pass the post ID for cancellation
+
     return render(request, 'posts/confirm_delete.html', context)

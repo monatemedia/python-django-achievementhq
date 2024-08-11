@@ -6,13 +6,13 @@ Confirm Delete
 {% endblock %}
 
 {% block content %}
-<!-- Page content-->
 <section class="py-5">
     <div class="container px-5">
-        <!-- Delete confirmation-->
         <div class="bg-light rounded-4 py-5 px-4 px-md-5">
             <div class="text-center mb-2">
-                <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i class="bi bi-exclamation-circle"></i></div>
+                <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3">
+                    <i class="bi bi-exclamation-circle"></i>
+                </div>
                 <h1 class="fw-bolder">Confirm Deletion</h1>
                 {% if post %}
                     <p class="lead fw-normal text-muted mb-0">Are you sure you want to delete the post "{{ post.heading_text }}"?</p>
@@ -31,7 +31,7 @@ Confirm Delete
                                 <input type="hidden" name="comment_id" value="{{ comment.id }}">
                                 <div class="custom-buttons-group">
                                     <div class="custom-buttons-left">
-                                        <!-- Confirm Button-->
+                                        <!-- Confirm Button -->
                                         <div class="d-grid">
                                             <button class="btn btn-danger px-4 py-3" type="submit">
                                                 <div class="d-inline-block bi bi-trash me-2"></div>
@@ -40,9 +40,9 @@ Confirm Delete
                                         </div>
                                     </div>
                                     <div class="custom-buttons-right">
-                                        <!-- Cancel Button-->
+                                        <!-- Cancel Button -->
                                         <div class="d-grid">
-                                            <a class="btn btn-outline-dark px-4 py-3" href="{% url 'posts:index' %}" role="button">
+                                            <a class="btn btn-outline-dark px-4 py-3" href="{% if post %}{% url 'posts:index' %}{% else %}{% url 'posts:detail' post_id %}{% endif %}" role="button">
                                                 <div class="d-inline-block bi bi-x-lg me-2"></div>
                                                 Cancel
                                             </a>
