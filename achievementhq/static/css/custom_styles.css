@@ -4,5 +4,8 @@
 }
 
 
-
-
+/* Hover effect specifically for the welcome user text */
+.navbar-nav .nav-item p.nav-link {
+    color: inherit; /* Ensures that the text color doesn't change on hover */
+    cursor: default; /* Keeps the cursor as an arrow */
+}
