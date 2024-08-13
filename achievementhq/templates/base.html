@@ -41,10 +41,12 @@
 
     <main class="flex-shrink-0">
         <!-- Alerts -->
-        {% if messages %}
-            {% include 'partials/_alerts.html' %}
+        {% if request.path not in excluded_paths %}
+            {% if messages %}
+                {% include 'partials/_alerts.html' %}
+            {% endif %}
         {% endif %}
-
+        
         <!-- Page Content -->
         {% block content %}{% endblock %}
     </main>

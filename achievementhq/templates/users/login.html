@@ -11,6 +11,10 @@ Log In
   style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
     <div class="container h-100">
+      <!-- Alerts-->
+      {% if messages %}
+        {% include 'partials/_alerts.html' %}
+      {% endif %}
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
           <div class="card" style="border-radius: 15px;">
@@ -20,21 +24,42 @@ Log In
               <form method="post">
                 {% csrf_token %}
                 <div class="form-floating mb-3">
-                  {{ form.username.label_tag }}
-                  {{ form.username|add_class:"form-control" }}
-                  {{ form.username.errors }}
+                    <input 
+                        type="text" 
+                        id="{{ form.username.id_for_label }}" 
+                        name="{{ form.username.html_name }}" 
+                        class="form-control{% if form.username.errors %} is-invalid{% endif %}" 
+                        value="{{ form.username.value|default_if_none:'' }}" 
+                        placeholder="Username"
+                    />
+                    <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                    <div class="invalid-feedback">
+                        {% for error in form.username.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
                 </div>
                 <div class="form-floating mb-3">
-                  {{ form.password.label_tag }}
-                  {{ form.password|add_class:"form-control" }}
-                  {{ form.password.errors }}
+                    <input 
+                        type="password" 
+                        id="{{ form.password.id_for_label }}" 
+                        name="{{ form.password.html_name }}" 
+                        class="form-control{% if form.password.errors %} is-invalid{% endif %}" 
+                        value="{{ form.password.value|default_if_none:'' }}" 
+                        placeholder="Password"
+                    />
+                    <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
                 </div>
                 <div class="d-flex justify-content-center">
-                  <button type="submit" class="btn btn-primary btn-block btn-lg text-body text-white-50">Log In</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">Log In</button>
                 </div>
-
-                <p class="text-center text-muted mt-5 mb-0">Don't have an account? <a href="{% url 'users:register' %}" class="fw-bold text-body"><u>Sign up here</u></a></p>
-              </form>
+            
+                <p class="text-center text-muted mt            
 
             </div>
           </div>
