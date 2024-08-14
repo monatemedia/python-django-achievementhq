@@ -1,13 +1,24 @@
 {% extends 'base.html' %}
 
+{% block title %}
+500 - Server Error
+{% endblock %}
+
 {% block content %}
-<div class="error-page">
-    <h1>500 - Server Error</h1>
-    <p>Oops! Something went wrong on our end.</p>
-    {% if user.is_authenticated %}
-    <a href="{% url 'posts:user_list' %}">Go back to the homepage</a>
-    {% else %}
-    <a href="{% url 'pages:index' %}">Go back to the homepage</a>
-    {% endif %}
-</div>
+<section class="container px-5">
+    <div class="bg-light rounded-4 py-5 px-4 px-md-5 mb-5 text-center">
+        <div class="feature bg-warning bg-gradient-warning-to-secondary text-white rounded-3 mb-3">
+            <i class="bi bi-wrench-adjustable-circle-fill"></i>
+        </div>
+        <h1 class="fw-bolder">500 - Server Error</h1>
+        <p class="lead fw-normal text-muted mb-4">Oops! Something went wrong on our end.</p>
+        <div class="d-grid">
+            {% if user.is_authenticated %}
+                <a class="btn btn-primary px-4 py-3" href="{% url 'posts:user_list' %}" role="button">Go back to the homepage</a>
+            {% else %}
+                <a class="btn btn-primary px-4 py-3" href="{% url 'pages:index' %}" role="button">Go back to the homepage</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
 {% endblock %}
