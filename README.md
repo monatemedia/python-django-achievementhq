@@ -38,10 +38,10 @@
   <p align="center">
     Keep track of all your achievements, no matter how big or small they are! 🎯 Achievement HQ is a social network for you and your friends to track and celebrate each other's achievements!
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="#getting-started"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="#getting-started">View Demo</a>
     ·
     <a href="mailto:edward@monatemedia.com?subject=Bug%20Report%20for%20AchievementHQ&body=**Bug%20Description:**%0D%0A%0D%0A**Steps%20to%20Reproduce:**%0D%0A1.%20Step%201%0D%0A2.%20Step%202%0D%0A3.%20Step%203%0D%0A%0D%0A**Expected%20Behavior:**%0D%0A%0D%0A**Actual%20Behavior:**%0D%0A%0D%0A**Screenshots%20or%20Error%20Messages:**%0D%0A%0D%0A**Browser%20and%20OS%20(Version):**%0D%0A%0D%0A**Additional%20Information:**%0D%0A%0D%0A">Report Bug</a>
     ·
@@ -88,8 +88,8 @@ Features:
 - Achievement Tracking: Log and monitor your progress on various goals
 - Social Sharing: Share your achievements with friends and celebrate their successes
 - Notifications: Stay updated with reminders and notifications about your and your friends' milestones :smile:
-- Customizable Profiles: Personalize your profile to showcase your top achievements and unique journey
-- Privacy Controls: Manage who sees your achievements and ensure your data is secure
+- Customizable Profiles: Personalize your profile to showcase your top achievements and unique journey (if feature is requested)
+- Privacy Controls: Manage who sees your achievements and ensure your data is secure (if feature is requested)
 
 Thank you for your interest in AchievementHQ! We look forward to celebrating your achievements together!
 
@@ -162,7 +162,7 @@ python demo.py
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+_For more examples, please refer to the [Documentation](#getting-started)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -170,15 +170,30 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Roadmap
 
-- [x] Add Bootstrap Theme and Static Files
-- [x] Add Templates Folder For Easy Template Management
+- [x] Add Pages App
+  - [x] Logged Out Pages
+    - [x] Home Page
+    - [x] Resume Page
+    - [x] Projects Page
+    - [ ] Contact Page
+      - [ ] Set Up Contact Page With Mail Server
+  - [ ] Privacy and Terms Pages
+    - [ ] Privacy Page
+    - [ ] Terms Page
 - [x] Add Polls App
-- [ ] Add Users App
-  - [ ] Add Sign Up Page
-  - [ ] Add Log In Page
-- [ ] Add Posts App
-  - [ ] Add Posts CRUD
+  - [x] Add Polls Page
+  - [x] Set Up Polls In Admin Area
+  - [ ] Restrict Polls to Logged In Users
+- [x] Add Posts App
+  - [ ] Add Posts Pages
+    - [x] Home Page
+    - [x] Home Page
+    - [x] Home Page
+    - [x] Home Page
   - [x] Add Posts Timeline
+- [x] Add Users App
+  - [x] Add Sign Up Page
+  - [x] Add Log In Page
 - [ ] Add Protected Routes
 - [ ] Add Comments App
   - [x] Allow Users To Comment On Posts
