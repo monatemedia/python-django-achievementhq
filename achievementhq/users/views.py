@@ -13,6 +13,8 @@ def register(request):
             form.save()
             messages.success(request, 'Your account has been created! You are now able to log in.')
             return redirect('users:login')
+        else:
+            messages.error(request, 'Your form is not valid. Please correct the errors below.')
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form, 'title': 'Register'})
