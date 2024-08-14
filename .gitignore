@@ -1,5 +1,6 @@
-# Project Outline
+# Project Files Not Required
 project-outline/
+achievementhq/staticfiles
 
 # Django #
 *.log
