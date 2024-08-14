@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="error-page">
+    <h1>500 - Server Error</h1>
+    <p>Oops! Something went wrong on our end.</p>
+    {% if user.is_authenticated %}
+    <a href="{% url 'posts:user_list' %}">Go back to the homepage</a>
+    {% else %}
+    <a href="{% url 'pages:index' %}">Go back to the homepage</a>
+    {% endif %}
+</div>
+{% endblock %}

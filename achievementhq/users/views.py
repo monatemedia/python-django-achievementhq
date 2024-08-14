@@ -13,6 +13,8 @@ def register(request):
             form.save()
             messages.success(request, 'Your account has been created! You are now able to log in.')
             return redirect('users:login')
+        else:
+            messages.error(request, 'Your form is not valid. Please correct the errors below.')
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form, 'title': 'Register'})
@@ -26,7 +28,7 @@ def login(request):
             messages.success(request, f'Welcome {user.username}!!')
             return redirect('posts:user_list')
         else:
-            messages.info(request, 'Invalid username or password.')
+            messages.error(request, 'Invalid username or password.')
     else:
         form = AuthenticationForm()
     return render(request, 'users/login.html', {'form': form, 'title': 'Login'})
