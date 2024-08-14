@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+404 - Page not found
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="main">
+        <h1>404</h1>
+        <p>It looks like you're lost...<br>That's a trouble?</p>
+        {% if user.is_authenticated %}
+            <a href="{% url 'posts:user_list' %}"><button>Go Home</button></a>
+        {% else %}
+            <a href="{% url 'pages:index' %}"><button>Go Home</button></a>
+        {% endif %}
+    </div>
+    <!-- Bubbles -->
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <script src="scripts.js">
+        // Optional: Add any JavaScript functionality here
+    </script>
+</section>
+{% endblock %}
