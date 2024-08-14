@@ -30,7 +30,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/monatemedia/python-django-achievementhq">
-    <img src="images/trophy-logo.webp" alt="Logo" width="80" height="80">
+    <img src="images/trophy-logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">AchievementHQ-README</h3>
