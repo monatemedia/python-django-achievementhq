@@ -26,7 +26,7 @@ def login(request):
             messages.success(request, f'Welcome {user.username}!!')
             return redirect('posts:user_list')
         else:
-            messages.info(request, 'Invalid username or password.')
+            messages.error(request, 'Invalid username or password.')
     else:
         form = AuthenticationForm()
     return render(request, 'users/login.html', {'form': form, 'title': 'Login'})
