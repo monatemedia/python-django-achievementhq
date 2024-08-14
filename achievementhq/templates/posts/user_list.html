@@ -6,7 +6,40 @@ All Users
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container px-5">
+    <!-- Create new achievement panel -->
+    <div class="bg-light rounded-4 py-5 px-4 px-md-5 mb-5">
+        <div class="text-center mb-2">
+            <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3">
+                <i class="bi bi-people"></i>
+            </div>
+            <h1 class="fw-bolder">Meet The Members</h1>
+            <p class="lead fw-normal text-muted mb-0">See the latest posts from all members and achievers</p>
+        </div>
+        
+        <!-- Create new achievement button -->
+        <div class="timeline">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="timeline-container">
+                            <div class="row gx-5 justify-content-center">
+                                <div class="col-lg-8 col-xl-6">
+                                    <div class="d-grid">
+                                        <a class="btn btn-primary px-4 py-3" href="{% url 'posts:create' %}" role="button">Post A New Achievement</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- All Users listed by latest post-->
+<div class="container px-5">
     <div class="row">
         {% for user in user_data %}
         <div class="col-md-6 mb-4 d-flex align-items-stretch">
