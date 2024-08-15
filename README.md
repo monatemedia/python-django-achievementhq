@@ -170,11 +170,15 @@ Logged in users can post and delete their own achievement posts:
 
 [![Posts Create Screen Shot][posts-create-screenshot]](https://example.com)
 
+Posts are organised on a timeline:
+
 [![Posts Timeline Screen Shot][posts-timeline-screenshot]](https://example.com)
 
 Logged in users can make and delete their comments on their own and other users achievement posts:
 
 [![Comments Screen Shot][comments-screenshot]](https://example.com)
+
+Comments are organised on a timeline by post:
 
 [![Comments Timeline Screen Shot][comments-timeline-screenshot]](https://example.com)
 
