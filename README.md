@@ -81,13 +81,13 @@
 
 [![AchievementHQ Screen Shot][product-screenshot]](https://example.com)
 
-Welcome to the official repository for AchievementHQ! AchievementHQ is a web application designed to help you and your friends track, share, and celebrate each other's achievements. Whether it's personal milestones, professional goals, or just daily wins, AchievementHQ makes it easy and fun to stay motivated and connected.
+Welcome to the official repository for AchievementHQ! AchievementHQ is a social network designed to help you and your friends track, share, and celebrate each other's achievements. Whether it's personal milestones, professional goals, or just daily wins, AchievementHQ makes it easy and fun to stay motivated and connected.
 
 Features:
 
 - Achievement Tracking: Log and monitor your progress on various goals
 - Social Sharing: Share your achievements with friends and celebrate their successes
-- Notifications: Stay updated with reminders and notifications about your and your friends' milestones :smile:
+- Notifications: Stay updated with reminders and notifications about your and your friends' milestones :smile: (if feature is requested)
 - Customizable Profiles: Personalize your profile to showcase your top achievements and unique journey (if feature is requested)
 - Privacy Controls: Manage who sees your achievements and ensure your data is secure (if feature is requested)
 
@@ -151,7 +151,7 @@ cd achievementhq
 python demo.py
 ```
 
-- Admin User name is "admin" and password is PennantFernlikeAnnouncerSubsidy
+- Admin user name is "admin" and password is PennantFernlikeAnnouncerSubsidy
 - All other users passwords are DecreasePrototypeEasiestOxidant
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -186,7 +186,7 @@ Logged in users can delete comments made on posts they own:\
 \
 [![Delete Confirmation Screen Shot][delete-confirmation-screenshot]](https://example.com)\
 \
-Administrators can log into the admin area at http://127.0.0.1:8000/admin/ and create, read, update and delete:\
+Administrators can log into the admin area at http://127.0.0.1:8000/admin/ and create, read, update and delete:
 
 - Users
 - User Groups
