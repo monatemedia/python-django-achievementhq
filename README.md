@@ -275,7 +275,7 @@ A list of resources that I found helpful and inspirational!
 [license-url]: https://github.com/monatemedia/python-django-achievementhq/blob/main/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/edwardbaitsewe/
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: images/homepage.png
 [Django]: https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green
 [Django-url]: https://www.djangoproject.com/
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
