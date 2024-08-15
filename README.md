@@ -79,7 +79,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.co)
+[![AchievementHQ Screen Shot][product-screenshot]](https://example.com)
 
 Welcome to the official repository for AchievementHQ! AchievementHQ is a web application designed to help you and your friends track, share, and celebrate each other's achievements. Whether it's personal milestones, professional goals, or just daily wins, AchievementHQ makes it easy and fun to stay motivated and connected.
 
@@ -160,7 +160,37 @@ python demo.py
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Logged in users can view all other users by their latest posts:
+
+[![View All Users By Post Screen Shot 1][view-all-users-1-screenshot]](https://example.com)
+
+[![View All Users By Post Screen Shot 2][view-all-users-2-screenshot]](https://example.com)
+
+Logged in users can post and delete their own achievement posts:
+
+[![Posts Create Screen Shot][posts-create-screenshot]](https://example.com)
+
+[![Posts Timeline Screen Shot][posts-timeline-screenshot]](https://example.com)
+
+Logged in users can make and delete their comments on their own and other users achievement posts:
+
+[![Comments Screen Shot][comments-screenshot]](https://example.com)
+
+[![Comments Timeline Screen Shot][comments-timeline-screenshot]](https://example.com)
+
+Logged in users can delete comments made on posts they own:
+
+[![Delete Confirmation Screen Shot][delete-confirmation-screenshot]](https://example.com)
+
+Administrators can log into the admin area at http://127.0.0.1:8000/admin/ and create, read, update and delete:
+
+- Users
+- User Groups
+- Polls
+- Posts
+- Comments
+
+[![Admin Area Screen Shot][admin-area-screenshot]](https://example.com)
 
 _For more examples, please refer to the [Documentation](#getting-started)_
 
@@ -194,10 +224,14 @@ _For more examples, please refer to the [Documentation](#getting-started)_
   - [x] Add Comments Pages
     - [x] Comments Detail Page
     - [x] Comments Form Page
+  - [x] Add Delete Confirmation Page For Posts & Comments
   - [x] Set Up Posts And Comments In Admin Area
 - [x] Add Users App
   - [x] Add Sign Up Page
   - [x] Add Log In Page
+- [x] Add Error Pages
+  - [x] Add 404 Not Found Page
+  - [x] Add 500 Server Error Page
 - [ ] Error Logging
 - [ ] Pagination
 - [ ] Mail Server
@@ -206,7 +240,7 @@ _For more examples, please refer to the [Documentation](#getting-started)_
 - [ ] Send Container To VPS
 - [ ] Map URL to IP Address
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/monatemedia/python-django-achievementhq/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -278,6 +312,14 @@ A list of resources that I found helpful and inspirational!
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/edwardbaitsewe/
 [product-screenshot]: images/homepage.png
+[view-all-users-1-screenshot]: images/view-all-users-1.png
+[view-all-users-2-screenshot]: images/view-all-users-2.png
+[posts-create-screenshot]: images/post-create.png
+[posts-timeline-screenshot]: images/posts-timeline.png
+[comments-screenshot]: images/comments.png
+[comments-timeline-screenshot]: images/comments-timeline.png
+[delete-confirmation-screenshot]: images/delete-confirmation.png
+[admin-area-screenshot]: images/admin-area.png
 [Django]: https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green
 [Django-url]: https://www.djangoproject.com/
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
