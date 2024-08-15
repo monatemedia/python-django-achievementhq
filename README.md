@@ -161,42 +161,42 @@ python demo.py
 ## Usage
 
 Logged in users can view all other users by their latest posts:
-
-[![View All Users By Post Screen Shot 1][view-all-users-1-screenshot]](https://example.com)
-
-[![View All Users By Post Screen Shot 2][view-all-users-2-screenshot]](https://example.com)
-
-Logged in users can post and delete their own achievement posts:
-
-[![Posts Create Screen Shot][posts-create-screenshot]](https://example.com)
-
-Posts are organised on a timeline:
-
-[![Posts Timeline Screen Shot][posts-timeline-screenshot]](https://example.com)
-
-Logged in users can make and delete their comments on their own and other users achievement posts:
-
-[![Comments Screen Shot][comments-screenshot]](https://example.com)
-
-Comments are organised on a timeline by post:
-
-[![Comments Timeline Screen Shot][comments-timeline-screenshot]](https://example.com)
-
-Logged in users can delete comments made on posts they own:
-
-[![Delete Confirmation Screen Shot][delete-confirmation-screenshot]](https://example.com)
-
-Administrators can log into the admin area at http://127.0.0.1:8000/admin/ and create, read, update and delete:
+\
+[![View All Users By Post Screen Shot 1][view-all-users-1-screenshot]](https://example.com)\
+\
+[![View All Users By Post Screen Shot 2][view-all-users-2-screenshot]](https://example.com)\
+\
+Logged in users can post and delete their own achievement posts:\
+\
+[![Posts Create Screen Shot][posts-create-screenshot]](https://example.com)\
+\
+Posts are organised on a timeline:\
+\
+[![Posts Timeline Screen Shot][posts-timeline-screenshot]](https://example.com)\
+\
+Logged in users can make and delete their comments on their own and other users achievement posts:\
+\
+[![Comments Screen Shot][comments-screenshot]](https://example.com)\
+\
+Comments are organised on a timeline by post:\
+\
+[![Comments Timeline Screen Shot][comments-timeline-screenshot]](https://example.com)\
+\
+Logged in users can delete comments made on posts they own:\
+\
+[![Delete Confirmation Screen Shot][delete-confirmation-screenshot]](https://example.com)\
+\
+Administrators can log into the admin area at http://127.0.0.1:8000/admin/ and create, read, update and delete:\
 
 - Users
 - User Groups
 - Polls
 - Posts
 - Comments
-
-[![Admin Area Screen Shot][admin-area-screenshot]](https://example.com)
-
-_For more examples, please refer to the [Documentation](#getting-started)_
+  \
+  [![Admin Area Screen Shot][admin-area-screenshot]](https://example.com)\
+  \
+  _For more examples, please refer to the [Documentation](#getting-started)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
