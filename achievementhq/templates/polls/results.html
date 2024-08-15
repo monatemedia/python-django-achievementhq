@@ -1,20 +1,39 @@
 {% extends 'base.html' %}
+
+{% block title %}
+    Results
+{% endblock %}
+
 {% block content %}
-<!-- Page content-->
+<!-- Page content -->
 <section class="py-5">
-	<div class="container px-5">
-<h1 class="mb-5 text-center">{{ question.question_text }}</h1>
+    <div class="container px-5">
+        <!-- Results Panel -->
+        <div class="bg-light rounded-4 py-5 px-4 px-md-5 mb-5">
+            <div class="text-center mb-4">
+                <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3">
+                    <i class="bi bi-graph-up"></i>
+                </div>
+                <h1 class="fw-bolder mb-3">{{ question.question_text }}</h1>
+                <p class="lead fw-normal text-muted mb-4">Here are the results of the poll.</p>
+            </div>
 
-<ul class="list-group mb-5">
-	{% for choice in question.choice_set.all %}
-	<li class="list-group-item">
-		{{ choice.choice_text }}  <span class="badge text-bg-primary float-right">{{ choice.votes }} vote{{ choice.votes | pluralize }}</span>
-	</li>
-	{% endfor %}
-</ul>
+            <!-- Results List -->
+            <ul class="list-group mb-5">
+                {% for choice in question.choice_set.all %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ choice.choice_text }}
+                        <span class="badge text-bg-primary">{{ choice.votes }} vote{{ choice.votes | pluralize }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
 
-<a class="btn btn-secondary" href="{% url 'polls:index' %}">Back To Polls</a>
-<a class="btn btn-dark" href="{% url 'polls:detail' question.id %}">Vote again?</a>
-</div>
+            <!-- Action Buttons -->
+            <div class="text-center">
+                <a class="btn btn-outline-dark btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" href="{% url 'polls:index' %}">Back To Polls</a>
+                <a class="btn btn-primary btn-lg px-5 py-3 fs-6 fw-bolder" href="{% url 'polls:detail' question.id %}">Vote Again?</a>
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock %}
