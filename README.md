@@ -160,7 +160,7 @@ python demo.py
 
 ## Usage
 
-Logged in users can view all other users by their latest posts:
+Logged in users can view all other users by their latest posts:\
 \
 [![View All Users By Post Screen Shot 1][view-all-users-1-screenshot]](https://example.com)\
 \
