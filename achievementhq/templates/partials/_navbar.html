@@ -23,11 +23,11 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'users:logout' %}">Sign Out</a></li>
                         {% else %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'pages:index' %}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'pages:resume' %}">Resume</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'pages:projects' %}">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'pages:about' %}">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'pages:why-join' %}">Why Join</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'pages:contact' %}">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'users:register' %}">Sign Up</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'users:login' %}">Log In</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'users:login' %}">Log In</a></li>
                         {% endif %}
                     </ul>
                 </div>

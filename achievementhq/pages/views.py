@@ -3,11 +3,11 @@ from django.shortcuts import render
 def index(request):
     return render(request, 'pages/index.html')
 
-def resume(request):
-    return render(request, 'pages/resume.html')
+def about(request):
+    return render(request, 'pages/about.html')
 
-def projects(request):
-    return render(request, 'pages/projects.html')
+def why_join(request):
+    return render(request, 'pages/why_join.html')
 
 def contact(request):
     return render(request, 'pages/contact.html')
