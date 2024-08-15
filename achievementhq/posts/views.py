@@ -105,7 +105,11 @@ def detail(request, post_id):
         post = get_object_or_404(Post, id=post_id)
         comments = Comment.objects.filter(post=post).order_by('-pub_date')
 
-        if not comments.exists():
+        # Determine if the post belongs to the current user
+        is_own_post = post.user == request.user
+
+        # Show the message only if the post is not the user's own and there are no comments
+        if not is_own_post and not comments.exists():
             messages.info(request, "Be the first to comment!")
 
         return render(request, 'posts/detail.html', {
@@ -148,25 +152,6 @@ def update(request, post_id):
     except Exception as e:
         # Log the error (in a real app)
         messages.error(request, "An error occurred while updating the post. You have been redirected back to your previous page.")
-        previous_page = request.META.get('HTTP_REFERER', 'posts:index')
-        return redirect(previous_page)
-
-# Delete a post
-@login_required
-def delete(request, post_id):
-    try:
-        post = get_object_or_404(Post, id=post_id, user=request.user)
-
-        if request.method == 'POST':
-            post.delete()
-            messages.success(request, "Your post has been successfully deleted.")
-            return redirect('posts:index')
-            
-        return render(request, 'posts/confirm_delete.html', {'post': post})
-
-    except Exception as e:
-        # Log the error (in a real app)
-        messages.error(request, "An error occurred while deleting the post. You have been redirected back to your previous page.")
         previous_page = request.META.get('HTTP_REFERER', 'posts:index')
         return redirect(previous_page)
 
@@ -226,7 +211,6 @@ def comment_detail(request, comment_id):
         previous_page = request.META.get('HTTP_REFERER', 'posts:index')
         return redirect(previous_page)
 
-
 # Update an existing comment
 @login_required
 def update_comment(request, comment_id):
@@ -250,8 +234,6 @@ def update_comment(request, comment_id):
             form = CommentForm(instance=comment)
 
         context = {
-            'title': 'Edit Comment',
-            'subtitle': 'Update your comment below:',
             'form': form,
             'post': comment.post
         }
@@ -263,24 +245,6 @@ def update_comment(request, comment_id):
         messages.error(request, "An error occurred while updating the comment. You have been redirected back to your previous page.")
         previous_page = request.META.get('HTTP_REFERER', 'posts:index')
         return redirect(previous_page)
-
-# Delete a comment
-@login_required
-def delete_comment(request, comment_id):
-    # Fetch the comment object or return a 404 error if it does not exist
-    comment = get_object_or_404(Comment, id=comment_id)
-
-    # Check if the user has permission to delete the comment
-    if request.user != comment.user and request.user != comment.post.user:
-        messages.error(request, "You do not have permission to delete this comment.")
-        return redirect('posts:detail', post_id=comment.post.id)
-
-    if request.method == 'POST':
-        comment.delete()
-        messages.success(request, "The comment has been successfully deleted.")
-        return redirect('posts:detail', post_id=comment.post.id)
-
-    return render(request, 'posts/confirm_delete.html', {'post': comment.post, 'comment': comment})
 
 # Confirm delete for posts and comments
 @login_required
@@ -309,7 +273,8 @@ def confirm_delete(request):
     if post_id:
         context['post'] = get_object_or_404(Post, id=post_id)
     elif comment_id:
-        context['comment'] = get_object_or_404(Comment, id=comment_id)
-        context['post_id'] = context['comment'].post.id  # Pass the post ID for cancellation
+        comment = get_object_or_404(Comment, id=comment_id)
+        context['comment'] = comment
+        context['post_id'] = comment.post.id  # Pass the post ID for cancellation
 
     return render(request, 'posts/confirm_delete.html', context)

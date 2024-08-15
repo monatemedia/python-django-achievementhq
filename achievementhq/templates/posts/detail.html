@@ -53,10 +53,10 @@
                                 <div class="d-inline-block bi bi-pen me-2"></div>
                                 Edit
                             </a>
-                            <a class="btn btn-outline-danger px-4 py-3" href="{% url 'posts:delete' post.id %}" role="button">
+                            <a class="btn btn-outline-danger px-4 py-3" href="{% url 'posts:confirm_delete' %}?post_id={{ post.id }}" role="button">
                                 <div class="d-inline-block bi bi-trash me-2"></div>
                                 Delete
-                            </a>
+                            </a>                            
                         </div>
                         {% endif %}
                         <div class="col-auto d-flex align-items-center ms-auto">
