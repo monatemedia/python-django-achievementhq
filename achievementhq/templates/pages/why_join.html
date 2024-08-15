@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Why Join
+{% endblock %}
+
+{% block content %}
+<!-- Projects Section-->
+<section class="py-5">
+    <div class="container px-5 mb-5">
+        <div class="text-center mb-5">
+            <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Why AchievementHQ?</span></h1>
+        </div>
+        <div class="row gx-5 justify-content-center">
+            <div class="col-lg-11 col-xl-9 col-xxl-8">
+                <!-- Project Card 1-->
+                <div class="card overflow-hidden shadow rounded-4 border-0 mb-5">
+                    <div class="card-body p-0">
+                        <div class="d-flex align-items-center">
+                            <div class="p-5">
+                                <h2 class="fw-bolder">Track and Share Your Success</h2>
+                                <p>AchievementHQ allows you to log your accomplishments—big or small—into your profile. Whether it's landing a dream job, finishing a marathon, or mastering a new skill, your achievements deserve to be recognized.</p>
+                            </div>
+                            <img class="img-fluid" src="https://dummyimage.com/300x400/343a40/6c757d" alt="..." />
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card 2-->
+                <div class="card overflow-hidden shadow rounded-4 border-0">
+                    <div class="card-body p-0">
+                        <div class="d-flex align-items-center">
+                            <div class="p-5">
+                                <h2 class="fw-bolder">Inspire and Be Inspired</h2>
+                                <p>Engage with a community of like-minded individuals who motivate each other to keep striving for greatness. Comment on others' posts to offer encouragement, and receive the same support for your own endeavors.</p>
+                            </div>
+                            <img class="img-fluid" src="https://dummyimage.com/300x400/343a40/6c757d" alt="..." />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Call to action section-->
+<section class="py-5 bg-gradient-primary-to-secondary text-white">
+    <div class="container px-5 my-5">
+        <div class="text-center">
+            <h2 class="display-4 fw-bolder mb-4">Signing up is quick, easy, and free</h2>
+            <a class="btn btn-outline-light btn-lg px-5 py-3 fs-6 fw-bolder" href="{% url 'users:register' %}">Join for Free</a>
+        </div>
+    </div>
+</section>
+<!-- Projects Section-->
+<section class="py-5">
+    <div class="container px-5 mb-5">
+        <div class="row gx-5 justify-content-center">
+            <div class="col-lg-11 col-xl-9 col-xxl-8">
+                <!-- Project Card 3-->
+                <div class="card overflow-hidden shadow rounded-4 border-0 mb-5">
+                    <div class="card-body p-0">
+                        <div class="d-flex align-items-center">
+                            <div class="p-5">
+                                <h2 class="fw-bolder">Beautifully Organized</h2>
+                                <p>With our elegant timeline layout, your achievements and comments are neatly displayed by year and date. This makes it easy to look back on your journey and see how far you've come, while also tracking the progress of your friends.</p>
+                            </div>
+                            <img class="img-fluid" src="https://dummyimage.com/300x400/343a40/6c757d" alt="..." />
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card 4-->
+                <div class="card overflow-hidden shadow rounded-4 border-0">
+                    <div class="card-body p-0">
+                        <div class="d-flex align-items-center">
+                            <div class="p-5">
+                                <h2 class="fw-bolder">Polls and Community Engagement</h2>
+                                <p>Participate in polls that matter to you, cast your vote, and see the collective results of the community. It’s a fun way to stay engaged and share your opinions on topics that resonate with everyone.</p>
+                            </div>
+                            <img class="img-fluid" src="https://dummyimage.com/300x400/343a40/6c757d" alt="..." />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
