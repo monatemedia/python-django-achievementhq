@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls import handler404, handler500
 from django.shortcuts import render
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     
@@ -40,3 +42,7 @@ def server_error(request):
 
 handler404 = page_not_found
 handler500 = server_error
+
+# Serving static files during development
+# if not settings.DEBUG:
+#     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
