@@ -177,9 +177,9 @@ _For more examples, please refer to the [Documentation](#getting-started)_
     - [x] Projects Page
     - [ ] Contact Page
       - [ ] Set Up Contact Page With Mail Server
-  - [ ] Privacy and Terms Pages
-    - [ ] Privacy Page
-    - [ ] Terms Page
+    - [ ] Privacy and Terms Pages
+      - [ ] Privacy Page
+      - [ ] Terms Page
 - [x] Add Polls App
   - [x] Add Polls Page
   - [x] Set Up Polls In Admin Area
@@ -201,6 +201,8 @@ _For more examples, please refer to the [Documentation](#getting-started)_
 - [ ] Add alerts for all actions
 - [ ] Add Error Pages Template
 - [ ] Switch From Broswer Alerts To Bootstrap Alerts
+- [ ] Error Logging
+- [ ] Pagination
 
 See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
 
