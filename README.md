@@ -254,9 +254,9 @@ A list of resources that I found helpful and inspirational!
 - [GeeksforGeeks Django Sign Up and Login With Confirmation Email](https://www.geeksforgeeks.org/django-sign-up-and-login-with-confirmation-email-python/)
 - [Aman Goyal How To Create A Timeline To Track Your Achievements](https://dev.to/goyalaman/how-to-create-a-timeline-to-track-your-achievements-3cg2)
 - [Start Bootstrap Theme Personal](https://startbootstrap.com/theme/personal)
-- [Django Project By The Django Software Foundation](https://www.djangoproject.com/)
-- [Bootstrap 5 Registration Form Component By Material Design For Bootstrap](https://mdbootstrap.com/docs/standard/extended/registration/)
-- [Best README Template By Othneil Drew](https://github.com/othneildrew/Best-README-Template)
+- [The Django Software Foundation Django Project](https://www.djangoproject.com/)
+- [Material Design For Bootstrap (Bootstrap 5) Registration Form Component](https://mdbootstrap.com/docs/standard/extended/registration/)
+- [Othneil Drew Best README Template](https://github.com/othneildrew/Best-README-Template)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
