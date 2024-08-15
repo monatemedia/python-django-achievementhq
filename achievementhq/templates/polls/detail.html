@@ -1,34 +1,48 @@
 {% extends 'base.html' %}
+
+{% block title %}
+    Voting
+{% endblock %}
+
 {% block content %}
-<!-- Page content-->
+<!-- Page content -->
 <section class="py-5">
-	<div class="container px-5">
-<a class="btn btn-secondary btn-sm mb-3" href="{% url 'polls:index' %}">Back To Polls</a>
-<h1 class="text-center mb-3">{{ question.question_text }}</h1>
+    <div class="container px-5">
+        <!-- Poll Detail Panel -->
+        <div class="bg-light rounded-4 py-5 px-4 px-md-5 mb-5">
+            <div class="text-center mb-4">
+                <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3">
+                    <i class="bi bi-check2-circle"></i>
+                </div>
+                <h1 class="fw-bolder mb-3">{{ question.question_text }}</h1>
+                <p class="lead fw-normal text-muted mb-4">
+                    Cast your vote and see the results!
+                </p>
+            </div>
 
-{% if error_message %}
-<p class="alert alert-danger">
-	<strong>{{ error_message }}</strong>
-</p>
-{% endif %}
+            <!-- Voting Form -->
+            <form action="{% url 'polls:vote' question.id %}" method="post">
+                {% csrf_token %}
+                {% for choice in question.choice_set.all %}
+                    <div class="form-check mb-3">
+                        <input
+                            type="radio"
+                            name="choice"
+                            class="form-check-input"
+                            id="choice{{ forloop.counter }}"
+                            value="{{ choice.id }}"
+                        />
+                        <label class="form-check-label" for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+                    </div>
+                {% endfor %}
+                <input type="submit" value="Vote" class="btn btn-primary btn-lg btn-block mt-4 mb-4" />
+            </form>
 
-<form action="{% url 'polls:vote' question.id %}" method="post">
-	{% csrf_token %} 
-	{% for choice in question.choice_set.all %}
-		<div class="form-check">
-			<input
-				type="radio"
-				name="choice"
-				class="form-check-input"
-				id="choice{{ forloop.counter }}"
-				value="{{ choice.id }}"
-			/>
-			<label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label
-			>
-		</div>
-	{% endfor %}
-	<input type="submit" value="Vote" class="btn btn-success btn-lg btn-block mt-4" />
-</form>
-</div>
+            <!-- Back To Polls Button -->
+            <div class="text-center">
+                <a class="btn btn-outline-dark btn-lg btn-block mt-4 mb-4" href="{% url 'polls:index' %}">Back To Polls</a>
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock %}
