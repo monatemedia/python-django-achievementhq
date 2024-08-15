@@ -79,7 +79,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![AchievementHQ Screen Shot][product-screenshot]]
 
 Welcome to the official repository for AchievementHQ! AchievementHQ is a web application designed to help you and your friends track, share, and celebrate each other's achievements. Whether it's personal milestones, professional goals, or just daily wins, AchievementHQ makes it easy and fun to stay motivated and connected.
 
