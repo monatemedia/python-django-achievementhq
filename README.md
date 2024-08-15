@@ -176,33 +176,35 @@ _For more examples, please refer to the [Documentation](#getting-started)_
     - [x] Resume Page
     - [x] Projects Page
     - [ ] Contact Page
-      - [ ] Set Up Contact Page With Mail Server
-    - [ ] Privacy and Terms Pages
-      - [ ] Privacy Page
-      - [ ] Terms Page
+      - [ ] Set Up Mail Server
+    - [ ] Privacy Page
+    - [ ] Terms Page
 - [x] Add Polls App
-  - [x] Add Polls Page
+  - [x] Add Polls Pages
+    - [x] Add Polls Index Page
+    - [x] Add Polls Details Page
+    - [x] Add Polls Results Page
   - [x] Set Up Polls In Admin Area
-  - [ ] Restrict Polls to Logged In Users
 - [x] Add Posts App
-  - [ ] Add Posts Pages
-    - [x] Home Page
-    - [x] Home Page
-    - [x] Home Page
-    - [x] Home Page
-  - [x] Add Posts Timeline
+  - [x] Add Posts Pages
+    - [x] Posts Index Page
+    - [x] Posts User List By Latest Post Page
+    - [x] Posts Detail Page
+    - [x] Posts Form Page
+  - [x] Add Comments Pages
+    - [x] Comments Detail Page
+    - [x] Comments Form Page
+  - [x] Set Up Posts And Comments In Admin Area
 - [x] Add Users App
   - [x] Add Sign Up Page
   - [x] Add Log In Page
-- [ ] Add Protected Routes
-- [ ] Add Comments App
-  - [x] Allow Users To Comment On Posts
-  - [ ] Allow Authors to Delete Comments
-- [ ] Add alerts for all actions
-- [ ] Add Error Pages Template
-- [ ] Switch From Broswer Alerts To Bootstrap Alerts
 - [ ] Error Logging
 - [ ] Pagination
+- [ ] Mail Server
+- [ ] Update demo.py To Run collectstatic
+- [ ] Set Up Docker Container
+- [ ] Send Container To VPS
+- [ ] Map URL to IP Address
 
 See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
 
