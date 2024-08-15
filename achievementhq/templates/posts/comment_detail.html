@@ -40,12 +40,23 @@ Comment Details
                         <!-- Button Group -->
                         <div class="row gx-4 mt-5">
                             <div class="col d-flex justify-content-start">
+                                <!-- Check if the user owns the comment -->
                                 {% if request.user == comment.user %}
                                     <!-- Edit Button -->
                                     <a class="btn btn-outline-primary px-4 py-3 me-2" href="{% url 'posts:update_comment' comment.id %}" role="button">
                                         <div class="d-inline-block bi bi-pen me-2"></div>
                                         Edit Comment
                                     </a>
+                                    <!-- Delete Button -->
+                                    <form method="get" action="{% url 'posts:confirm_delete' %}">
+                                        <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                        <button class="btn btn-outline-danger px-4 py-3" type="submit">
+                                            <div class="d-inline-block bi bi-trash me-2"></div>
+                                            Delete Comment
+                                        </button>
+                                    </form>
+                                <!-- Check if the user owns the post but not the comment -->
+                                {% elif request.user == comment.post.user %}
                                     <!-- Delete Button -->
                                     <form method="get" action="{% url 'posts:confirm_delete' %}">
                                         <input type="hidden" name="comment_id" value="{{ comment.id }}">
@@ -64,7 +75,6 @@ Comment Details
                                 </a>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>

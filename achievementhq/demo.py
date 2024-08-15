@@ -49,6 +49,9 @@ def main():
     # Create Fake Comments
     run_command('pipenv run python manage.py create_comments')
 
+    # Clear Polls Table
+    run_command('pipenv run python manage.py clear_polls_table')
+
     # Create Fake Polls
     run_command('pipenv run python manage.py populate_questions')
 

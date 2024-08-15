@@ -13,9 +13,9 @@ Edit Comment
                 <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3">
                     <i class="bi bi-chat-dots"></i>
                 </div>
-                <h1 class="fw-bolder">{{ title }}</h1>
+                <h1 class="fw-bolder">Edit Comment</h1>
                 <p class="lead fw-normal text-muted mb-0">
-                    {{ subtitle }}
+                    Update your comment below:
                 </p>
             </div>
             <!-- Comment Detail Component -->
@@ -29,7 +29,7 @@ Edit Comment
                                         {% if form %}
                                             <form method="post">
                                                 {% csrf_token %}
-                                                <!-- Comment input-->
+                                                <!-- Comment input -->
                                                 <div class="form-floating mb-3">
                                                     <textarea 
                                                         id="id_comments_text" 
@@ -92,7 +92,7 @@ Edit Comment
                                                 <div class="custom-buttons-right">
                                                     <!-- Delete Button-->
                                                     <div class="d-grid">
-                                                        <a class="btn btn-danger btn-lg" href="{% url 'posts:delete_comment' comment.id %}" role="button">Delete</a>
+                                                        <a class="btn btn-danger btn-lg" href="{% url 'posts:confirm_delete' %}?comment_id={{ comment.id }}" role="button">Delete</a>
                                                     </div>
                                                 </div>
                                             </div>
