@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "99ab5f88c956ac3b958455f0813439159169aaf7f16616fcf2b541e51d2f0cf5"
+            "sha256": "d40fe778b52557b8c6bb1e702d4fb92d9b2772316f71624de54bb4d1703111f0"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -26,21 +26,21 @@
         },
         "django": {
             "hashes": [
-                "sha256:bd4505cae0b9bd642313e8fb71810893df5dc2ffcacaa67a33af2d5cd61888f2",
-                "sha256:f216510ace3de5de01329463a315a629f33480e893a9024fc93d8c32c22913da"
+                "sha256:848a5980e8efb76eea70872fb0e4bc5e371619c70fffbe48e3e1b50b2c09455d",
+                "sha256:d3b811bf5371a26def053d7ee42a9df1267ef7622323fe70a601936725aa4557"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==5.0.7"
+            "version": "==5.1"
         },
         "faker": {
             "hashes": [
-                "sha256:33921b6fc3b83dd75fd42ec7f47ec87b50c00d3c5380fa7d8a507dab848b8229",
-                "sha256:e8c5ef795223e945d9166aea3c0ecaf85ac54b4ade2af068d8e3c6524c2c0aa7"
+                "sha256:32c78b68d2ba97aaad78422e4035785de2b4bb46b81e428190fc11978da9036c",
+                "sha256:55ed0c4ed7bf16800c64823805f6fbbe6d4823db4b7c0903f6f890b8e4d6c34b"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.8'",
-            "version": "==26.1.0"
+            "version": "==27.0.0"
         },
         "python-dateutil": {
             "hashes": [
@@ -49,6 +49,14 @@
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "version": "==2.9.0.post0"
+        },
+        "python-decouple": {
+            "hashes": [
+                "sha256:ba6e2657d4f376ecc46f77a3a615e058d93ba5e465c01bbe57289bfb7cce680f",
+                "sha256:d0d45340815b25f4de59c974b855bb38d03151d81b037d9e3f463b0c9f8cbd66"
+            ],
+            "index": "pypi",
+            "version": "==3.8"
         },
         "six": {
             "hashes": [
