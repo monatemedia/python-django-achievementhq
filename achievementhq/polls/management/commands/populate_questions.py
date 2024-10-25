@@ -12,7 +12,7 @@ class Command(BaseCommand):
         Question.objects.all().delete()
 
         # Create 10 questions
-        for i in range(10):
+        for i in range(5):
             question_text = f"Achievement Question {i+1}"
             pub_date = timezone.now()
             question = Question.objects.create(question_text=question_text, pub_date=pub_date)

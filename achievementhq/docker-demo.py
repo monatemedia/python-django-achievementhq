@@ -28,36 +28,36 @@ def list_users():
         print(f"Username: {user.username}, Email: {user.email}, Type: {user_type}")
 
 def main():
-    # Create virtual environment and install dependencies from Pipfile
-    run_command('pipenv install')  # This will create the venv and install all dependencies specified in the Pipfile
+    # Install dependencies (assuming pip and requirements.txt are used)
+    run_command('pip install -r requirements.txt')
 
     # Run initial migrations
-    run_command('pipenv run python manage.py migrate')
+    run_command('python manage.py migrate')
 
     # Create superuser if it does not exist
-    run_command('pipenv run python manage.py create_superuser_if_not_exists')
+    run_command('python manage.py create_superuser_if_not_exists')
 
     # Inject Fake Data (Optional)
     # Uncomment if you have additional scripts or setup commands
-    # run_command('pipenv run python manage.py shell')
+    # run_command('python manage.py shell')
 
     # Delete all users except for the admin user
-    run_command('pipenv run python manage.py delete_non_admin_users')
+    run_command('python manage.py delete_non_admin_users')
 
     # Create Fake Users
-    run_command('pipenv run python manage.py create_users')
+    run_command('python manage.py create_users')
 
     # Create Fake Posts
-    run_command('pipenv run python manage.py create_posts')
+    run_command('python manage.py create_posts')
 
     # Create Fake Comments
-    run_command('pipenv run python manage.py create_comments')
+    run_command('python manage.py create_comments')
 
     # Clear Polls Table
-    run_command('pipenv run python manage.py clear_polls_table')
+    run_command('python manage.py clear_polls_table')
 
     # Create Fake Polls
-    run_command('pipenv run python manage.py populate_questions')
+    run_command('python manage.py populate_questions')
 
     # List all users with their details
     list_users()
