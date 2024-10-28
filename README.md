@@ -251,10 +251,12 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
-    environment:
-      - ADMIN_USERNAME=admin
-      - ADMIN_PASSWORD=PennantFernlikeAnnouncerSubsidy
-      - USER_PASSWORD=DecreasePrototypeEasiestOxidant
+```
+
+10. Create `entrypoint.sh` script in root
+
+```sh
+touch entrypoint.sh 
 ```
 
 10. Run Docker Compose Build command
@@ -417,6 +419,11 @@ A list of resources that I found helpful and inspirational!
 - [The Django Software Foundation Django Project](https://www.djangoproject.com/)
 - [Material Design For Bootstrap (Bootstrap 5) Registration Form Component](https://mdbootstrap.com/docs/standard/extended/registration/)
 - [Othneil Drew Best README Template](https://github.com/othneildrew/Best-README-Template)
+- [Django Road Deploying Django with Docker Compose, Gunicorn and Nginx](https://youtu.be/vJAfq6Ku4cI?si=uPeJRauxcgIClGUX)
+- [Programonaut How To Easily Set Up A Server (VPS) For Your Side Projects](https://youtu.be/v1SvBm5Wn8I?si=KraIJZwkuOiRfBnx)
+- [Programonaut How To Host An Application On A Server (VPS) Using Docker?](https://youtu.be/zHh7oGjkefY?si=vw2BcVUtFLtxxbV3)
+- [Programonaut How To Set Up A Domain For Your Application!](https://youtu.be/MUYmFtxykMA?si=UyQyrgHJcU4yN-5O)
+- [Programonaut How To Set Up A Reverse Proxy With Free SSL Using Nginx-Proxy](https://youtu.be/ynGeCodXFXI?si=SiLZG3MJK3SHEttI)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
