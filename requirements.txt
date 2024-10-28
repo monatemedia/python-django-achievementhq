@@ -10,6 +10,10 @@ django==5.1.2
     # via -r requirements.in
 faker==30.8.1
     # via -r requirements.in
+gunicorn==23.0.0
+    # via -r requirements.in
+packaging==24.1
+    # via gunicorn
 python-dateutil==2.9.0.post0
     # via faker
 python-decouple==3.8

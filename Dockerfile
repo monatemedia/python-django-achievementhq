@@ -1,29 +1,34 @@
 # Python parent image
 FROM python:3.12-slim
 
-# Check the PATH
-RUN echo $PATH
-
 # Upgrade pip
-RUN pip install --upgrade pip
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    python3-dev \
+    build-essential \
+    cron && \
+    pip install --upgrade pip
 
 # Set the working directory
 WORKDIR /app
 
-# Copy requirements.txt from the root folder
-COPY requirements.txt /app/
+# Copy requirements
+COPY ./requirements.txt .
 
-# Install dependencies using pip
+# Install requirements
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the project contents from the achievementhq folder to /app
-COPY achievementhq/ /app/
+COPY ./achievementhq /app
 
-# Remove Pipfile and Pipfile.lock if they exist
-RUN rm -f Pipfile Pipfile.lock
+# Ensure static files can be collected
+RUN mkdir -p /app/staticfiles
+
+# Entry point script
+COPY ./entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT [ "sh", "/entrypoint.sh" ]
 
 # Expose the port (if necessary)
 EXPOSE 8000
 
-# Command to run demo.py
-CMD ["python", "docker-demo.py"]
