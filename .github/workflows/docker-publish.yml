@@ -42,5 +42,10 @@ jobs:
           docker build . \
             --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }} \
             --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+          # Push the images
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+          echo "Image Name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
+          echo "Tag: ${{ env.TAG }}"
