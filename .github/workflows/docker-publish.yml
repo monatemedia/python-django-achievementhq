@@ -39,6 +39,7 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
+          # Display the image name and tags for debugging
           echo "Image Name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
           echo "Tag: ${{ env.TAG }}"
 
