@@ -28,11 +28,6 @@ def list_users():
         print(f"Username: {user.username}, Email: {user.email}, Type: {user_type}")
 
 def main():
-    # Install dependencies (assuming pip and requirements.txt are used)
-    run_command('pip install -r requirements.txt')
-
-    # Run initial migrations
-    run_command('python manage.py migrate')
 
     # Create superuser if it does not exist
     run_command('python manage.py create_superuser_if_not_exists')

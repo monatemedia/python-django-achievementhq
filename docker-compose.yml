@@ -1,4 +1,13 @@
 services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  
   web:
     volumes:
       - static:/staticfiles
@@ -10,17 +19,7 @@ services:
       - "8000:8000"
     depends_on:
       - db
-    command: gunicorn achievementhq.wsgi:application --bind 0.0.0.0:8000  # Use gunicorn for production
-
-  db:
-    image: postgres:latest
-    environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    
+      
   nginx:
     build: ./nginx
     volumes:
@@ -29,16 +28,6 @@ services:
       - "80:80"
     depends_on:
       - web
-
-  cron:
-    build:
-      context: .
-    volumes:
-      - ./achievementhq:/app  # Ensure the app is accessible
-    env_file: 
-      - .env
-    entrypoint: ["/bin/sh", "-c"]
-    command: ["sh", "-c", "sleep 300; python /app/docker-demo.py; while true; do sleep 300; python /app/docker-demo.py; done"]
 
 volumes:
   static: # Define the static volume here
