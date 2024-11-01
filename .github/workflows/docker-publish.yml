@@ -24,18 +24,18 @@ jobs:
 
       - name: Set up .env Variables
         run: |
-          echo "DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }}" >> .env
-          echo "DJANGO_DEBUG=${{ secrets.DJANGO_DEBUG }}" >> .env
-          echo "ADMIN_USER=${{ secrets.ADMIN_USER }}" >> .env
-          echo "ADMIN_EMAIL=${{ secrets.ADMIN_EMAIL }}" >> .env
-          echo "ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}" >> .env
-          echo "FAKE_USER_PASSWORD=${{ secrets.FAKE_USER_PASSWORD }}" >> .env
-          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
-          echo "DB_USER=${{ secrets.DB_USER }}" >> .env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
-          echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
-          echo "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
+          echo "DJANGO_ALLOWED_HOSTS=\"${{ secrets.DJANGO_ALLOWED_HOSTS }}\"" >> .env
+          echo "DJANGO_DEBUG=\"${{ secrets.DJANGO_DEBUG }}\"" >> .env
+          echo "ADMIN_USER=\"${{ secrets.ADMIN_USER }}\"" >> .env
+          echo "ADMIN_EMAIL=\"${{ secrets.ADMIN_EMAIL }}\"" >> .env
+          echo "ADMIN_PASSWORD=\"${{ secrets.ADMIN_PASSWORD }}\"" >> .env
+          echo "FAKE_USER_PASSWORD=\"${{ secrets.FAKE_USER_PASSWORD }}\"" >> .env
+          echo "DB_NAME=\"${{ secrets.DB_NAME }}\"" >> .env
+          echo "DB_USER=\"${{ secrets.DB_USER }}\"" >> .env
+          echo "DB_PASSWORD=\"${{ secrets.DB_PASSWORD }}\"" >> .env
+          echo "DB_HOST=\"${{ secrets.DB_HOST }}\"" >> .env
+          echo "DB_PORT=\"${{ secrets.DB_PORT }}\"" >> .env
+          echo "DJANGO_SECRET_KEY=\"${{ secrets.DJANGO_SECRET_KEY }}\"" >> .env
 
       - name: Build and Push Docker Image
         run: |
