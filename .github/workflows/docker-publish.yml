@@ -39,6 +39,9 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
+          echo "Image Name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
+          echo "Tag: ${{ env.TAG }}"
+
           docker build . \
             --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }} \
             --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
@@ -46,6 +49,3 @@ jobs:
           # Push the images
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-
-          echo "Image Name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
-          echo "Tag: ${{ env.TAG }}"
