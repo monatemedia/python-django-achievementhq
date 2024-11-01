@@ -1,6 +1,10 @@
 # Build stage
 FROM python:3.12-slim as build
 
+# Set up build argument for DJANGO_SECRET_KEY and pass it as an environment variable
+ARG DJANGO_SECRET_KEY
+ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+
 # Upgrade pip and install dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -35,6 +39,10 @@ RUN python manage.py collectstatic --noinput
 
 # Production stage
 FROM python:3.12-slim as production
+
+# Set up the secret key in production if required
+ARG DJANGO_SECRET_KEY
+ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
 
 # Install cron in the production stage
 RUN apt-get update && \
