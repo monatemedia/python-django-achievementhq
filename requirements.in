@@ -1,0 +1,4 @@
+Django
+Faker
+python-decouple
+gunicorn

@@ -119,7 +119,7 @@ The project requires Python 3 and pipenv to be installed on your local machine.
   pip install pipenv
   ```
 
-### Installation
+### Installation on Local Machine
 
 1.  Download repository
 
@@ -145,12 +145,134 @@ pipenv shell
 cd achievementhq
 ```
 
-5. Run the demo app
+5. Build the demo app
 
 ```sh
 python demo.py
 ```
 
+6. Start the server
+
+```sh
+python manage.py runserver
+```
+
+- Admin dashboard can be visited at /admin in the browser
+- Admin user name is "admin" and password is PennantFernlikeAnnouncerSubsidy
+- All other users passwords are DecreasePrototypeEasiestOxidant
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Docker Deployment
+
+1.  Download repository
+
+```sh
+git clone https://github.com/monatemedia/python-django-achievementhq.git
+```
+
+2. Change into main directory
+
+```sh
+cd python-django-achievementhq
+```
+
+3. Install `pip-tools` to create top-level dependencies
+
+```sh
+pip install pip-tools
+```
+
+4. Create a `requirements.in` file in the root and list your top-level dependencies.
+
+```sh
+Django
+Faker
+python-decouple
+```
+
+5. Compile the requirements and generate a requirments.txt file
+
+```sh
+pip-compile requirements.in
+```
+
+6. Create Dockerfile in project root
+
+```sh
+touch Dockerfile
+```
+
+7. Open code editor to edit Dockerfile
+
+```sh
+# Python parent image
+FROM python:3.12-slim
+
+# Check the PATH
+RUN echo $PATH
+
+# Set the working directory
+WORKDIR /app
+
+# Copy requirements.txt from the root folder
+COPY requirements.txt /app/
+
+# Install dependencies using pip
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the project contents from the achievementhq folder to /app
+COPY achievementhq/ /app/
+
+# Remove Pipfile and Pipfile.lock if they exist
+RUN rm -f Pipfile Pipfile.lock
+
+# Expose the port (if necessary)
+EXPOSE 8000
+
+# Command to run demo.py
+CMD ["python", "docker-demo.py"]
+```
+
+8. Create `docker-compose.yml` in project root
+
+```sh
+touch docker-compose.yml
+```
+
+9. Open `docker-compose.yml` and edit file
+
+```sh
+services:
+  web:
+    build: .
+    command: python achievementhq/manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+```
+
+10. Create `entrypoint.sh` script in root
+
+```sh
+touch entrypoint.sh 
+```
+
+10. Run Docker Compose Build command
+
+```sh
+docker compose build
+```
+
+11. Run Docker Compose Up command in Detached Mode
+
+```sh
+docker compose up -d
+```
+
+
+- Admin dashboard can be visited at /admin in the browser
 - Admin user name is "admin" and password is PennantFernlikeAnnouncerSubsidy
 - All other users passwords are DecreasePrototypeEasiestOxidant
 
@@ -297,6 +419,11 @@ A list of resources that I found helpful and inspirational!
 - [The Django Software Foundation Django Project](https://www.djangoproject.com/)
 - [Material Design For Bootstrap (Bootstrap 5) Registration Form Component](https://mdbootstrap.com/docs/standard/extended/registration/)
 - [Othneil Drew Best README Template](https://github.com/othneildrew/Best-README-Template)
+- [Django Road Deploying Django with Docker Compose, Gunicorn and Nginx](https://youtu.be/vJAfq6Ku4cI?si=uPeJRauxcgIClGUX)
+- [Programonaut How To Easily Set Up A Server (VPS) For Your Side Projects](https://youtu.be/v1SvBm5Wn8I?si=KraIJZwkuOiRfBnx)
+- [Programonaut How To Host An Application On A Server (VPS) Using Docker?](https://youtu.be/zHh7oGjkefY?si=vw2BcVUtFLtxxbV3)
+- [Programonaut How To Set Up A Domain For Your Application!](https://youtu.be/MUYmFtxykMA?si=UyQyrgHJcU4yN-5O)
+- [Programonaut How To Set Up A Reverse Proxy With Free SSL Using Nginx-Proxy](https://youtu.be/ynGeCodXFXI?si=SiLZG3MJK3SHEttI)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

@@ -3,13 +3,14 @@ from django.contrib.auth.models import User
 from faker import Faker
 from django.utils import timezone
 from datetime import datetime, timedelta
+from decouple import config
 
 class Command(BaseCommand):
     help = 'Generate fake users and list them'
 
     def handle(self, *args, **kwargs):
         fake = Faker()
-        password = 'DecreasePrototypeEasiestOxidant'
+        password = config('FAKE_USER_PASSWORD')
         end_date = timezone.now()
         start_date = end_date - timedelta(days=5*365)
 

@@ -1,6 +1,8 @@
 # Project Files Not Required
-project-outline/
+achievementhq/db.sqlite3
 achievementhq/staticfiles
+static
+project-outline/
 
 # Django #
 *.log
