@@ -21,12 +21,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the project contents from the achievementhq folder to /app
 COPY ./achievementhq /app
 
-# Run Django migrations
-RUN python manage.py migrate --no-input
-
-# Run Docker Demo
-RUN python docker-demo.py --no-input
-
 # Ensure static files can be collected
 RUN mkdir -p /app/staticfiles
 
@@ -52,6 +46,9 @@ COPY --from=build /app /app
 # Copy static files from build to production stage
 COPY --from=build /app/staticfiles /app/staticfiles
 
+# Ensure entrypoint is executable
+RUN chmod +x /app/entrypoint.sh
+
 # Ensure the demo script is executable
 RUN chmod +x /app/docker-demo.py
 
@@ -67,5 +64,5 @@ RUN crontab /etc/cron.d/my-cron
 # Create the log file to be able to run tail
 RUN touch /var/log/cron.log
 
-# Use an entrypoint script to handle migrations and static files
-ENTRYPOINT ["sh", "-c", "cron && sleep 10 && tail -f /var/log/cron.log & gunicorn achievementhq.wsgi:application --bind 0.0.0.0:8000"]
+# Define entrypoint for migrations, cron, and app start
+ENTRYPOINT ["/app/entrypoint.sh"]
