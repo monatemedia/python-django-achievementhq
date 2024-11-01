@@ -42,6 +42,7 @@ jobs:
           echo "Image Name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
           echo "Tag: ${{ env.TAG }}"
 
+          # Build the Docker image with the SHA tag and the latest tag
           docker build . \
             --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }} \
             --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
