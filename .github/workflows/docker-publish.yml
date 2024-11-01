@@ -39,11 +39,12 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          # Display the image name and tags for debugging
-          echo "Image Name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
-          echo "Tag: ${{ env.TAG }}"
+          echo "Building Docker image with the following parameters:"
+          echo "REGISTRY: ${{ env.REGISTRY }}"
+          echo "IMAGE_NAME: ${{ env.IMAGE_NAME }}"
+          echo "TAG: ${{ env.TAG }}"
 
-          # Build the Docker image with the SHA tag and the latest tag
+          # Build the Docker image
           docker build . \
             --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }} \
             --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
