@@ -7,7 +7,7 @@ on:
 env:
   #Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }} # Automatically use the repo name
+  IMAGE_NAME: ${{ github.actor }}/python-django-achievementhq:latest
   TAG: ${{ github.sha }} # Unique tag based on the commit SHA
 
 jobs:
