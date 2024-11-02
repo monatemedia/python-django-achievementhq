@@ -7,7 +7,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.actor }}/python-django-achievementhq
-  TAG: ${{ github.sha }} # Add this line to set the TAG variable
+  TAG: ${{ github.sha }} # Use the commit SHA as the image tag
 
 jobs:
   publish:
@@ -15,10 +15,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Enable Debugging Logs
-        run: echo "::set-env name=ACTIONS_RUNNER_DEBUG::true"
-
       - uses: actions/checkout@v3
+
+      - name: Enable Debugging Logs
+        run: echo "ACTIONS_RUNNER_DEBUG=true" >> $GITHUB_ENV
 
       - name: Login to GitHub Container Registry
         run: |
@@ -61,8 +61,8 @@ jobs:
             --build-arg DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }} \
             --build-arg DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }} \
             --build-arg DJANGO_DEBUG=${{ secrets.DJANGO_DEBUG }} \
-            --tag $REGISTRY/$IMAGE_NAME:$TAG
-          docker inspect $REGISTRY/$IMAGE_NAME:$TAG | grep DJANGO_SECRET_KEY || echo "DJANGO_SECRET_KEY not found"
+            --tag $REGISTRY/$IMAGE_NAME:$TAG \
+            --tag $REGISTRY/$IMAGE_NAME:latest
 
           # Push the images
           docker push $REGISTRY/$IMAGE_NAME:$TAG
