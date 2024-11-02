@@ -15,6 +15,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Enable Debugging Logs
+        run: echo "::set-env name=ACTIONS_RUNNER_DEBUG::true"
+
       - uses: actions/checkout@v3
 
       - name: Login to GitHub Container Registry
@@ -36,6 +39,16 @@ jobs:
           echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
           echo "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
 
+      - name: Validate Secrets Injection
+        run: |
+          for var in DJANGO_ALLOWED_HOSTS DJANGO_DEBUG ADMIN_USER ADMIN_EMAIL ADMIN_PASSWORD FAKE_USER_PASSWORD DB_NAME DB_USER DB_PASSWORD DB_HOST DB_PORT DJANGO_SECRET_KEY; do
+            if [ -z "${!var}" ]; then
+              echo "Error: $var is missing or empty"
+            else
+              echo "$var is set"
+            fi
+          done
+
       - name: Build and Push Docker Image
         run: |
           echo "Building Docker image with the following parameters:"
@@ -48,8 +61,8 @@ jobs:
             --build-arg DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }} \
             --build-arg DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }} \
             --build-arg DJANGO_DEBUG=${{ secrets.DJANGO_DEBUG }} \
-            --tag $REGISTRY/$IMAGE_NAME:$TAG \
-            --tag $REGISTRY/$IMAGE_NAME:latest
+            --tag $REGISTRY/$IMAGE_NAME:$TAG
+          docker inspect $REGISTRY/$IMAGE_NAME:$TAG | grep DJANGO_SECRET_KEY || echo "DJANGO_SECRET_KEY not found"
 
           # Push the images
           docker push $REGISTRY/$IMAGE_NAME:$TAG
