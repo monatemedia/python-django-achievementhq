@@ -4,6 +4,9 @@ set -e
 # Run migrations
 python manage.py migrate --noinput
 
+# Run docker demo
+python docker-demo.py
+
 # Start cron
 cron && sleep 10
 

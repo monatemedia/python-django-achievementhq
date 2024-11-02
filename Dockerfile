@@ -46,6 +46,12 @@ COPY --from=build /app /app
 # Copy static files from build to production stage
 COPY --from=build /app/staticfiles /app/staticfiles
 
+# Copy entry point into production stage
+COPY ./entrypoint.sh /app/entrypoint.sh
+
+# Debug: Confirm that all required files are present
+RUN ls -l /app
+
 # Ensure entrypoint is executable
 RUN chmod +x /app/entrypoint.sh
 
