@@ -1,6 +1,16 @@
 # Build stage
 FROM python:3.12-slim as build
 
+# Add these lines at the top to accept build arguments
+ARG DJANGO_SECRET_KEY
+ARG DJANGO_ALLOWED_HOSTS
+ARG DJANGO_DEBUG
+
+# Set the build arguments as environment variables
+ENV DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
+ENV DJANGO_ALLOWED_HOSTS=$DJANGO_ALLOWED_HOSTS
+ENV DJANGO_DEBUG=$DJANGO_DEBUG
+
 # Upgrade pip and install dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \

@@ -45,7 +45,9 @@ jobs:
 
           # Build the Docker image
           docker build . \
-            --build-arg DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY} \
+            --build-arg DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }} \
+            --build-arg DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }} \
+            --build-arg DJANGO_DEBUG=${{ secrets.DJANGO_DEBUG }} \
             --tag $REGISTRY/$IMAGE_NAME:$TAG \
             --tag $REGISTRY/$IMAGE_NAME:latest
 
