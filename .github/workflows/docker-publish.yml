@@ -7,7 +7,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.actor }}/python-django-achievementhq
-  TAG: ${{ github.sha }} # Unique tag based on the commit SHA
+  TAG: ${{ github.sha }}
 
 jobs:
   publish:
