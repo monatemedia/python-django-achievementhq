@@ -17,13 +17,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Enable Debugging Logs
-        run: echo "ACTIONS_RUNNER_DEBUG=true" >> $GITHUB_ENV
-
       - name: Login to GitHub Container Registry
-        env:
-          PAT: ${{ secrets.PAT }}
-        run: echo "$PAT" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+        run: |
+          echo ${{ secrets.PAT }} | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
 
       - name: Validate Secrets Injection
         run: |
@@ -115,7 +111,7 @@ jobs:
 
   deploy:
     needs: publish
-    name: deploy image
+    name: Deploy Image
     runs-on: ubuntu-latest
 
     steps:
@@ -125,16 +121,14 @@ jobs:
         run: |
           install -m 600 -D /dev/null ~/.ssh/id_rsa
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
 
       - name: connect and pull
-        run:
-          ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
           export DB_NAME=${{ secrets.DB_NAME }} &&
           export DB_USER=${{ secrets.DB_USER }} &&
           export DB_PASSWORD=${{ secrets.DB_PASSWORD }} &&
-          cd ${{ secrets.WORK_DIR }} && docker-compose pull && docker-compose up -d && exit"
+          cd ${{ secrets.WORK_DIR }} && docker compose pull && docker compose up -d"
 
       - name: cleanup
         run: rm -rf ~/.ssh
