@@ -89,24 +89,24 @@ jobs:
           fi
 
       - name: Build and Push Docker Image
-        env:
-          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-          DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
-          DJANGO_DEBUG: ${{ secrets.DJANGO_DEBUG }}
         run: |
           echo "Building Docker image with the following parameters:"
-          echo "REGISTRY: $REGISTRY"
-          echo "IMAGE_NAME: $IMAGE_NAME"
-          echo "TAG: $TAG"
+          echo "REGISTRY: ${{ secrets.REGISTRY }}"
+          echo "IMAGE_NAME: ${{ secrets.IMAGE_NAME }}"
+          echo "TAG: ${{ secrets.GITHUB_SHA }}"
 
-          # Build the Docker image
-          docker build . \
-            --build-arg DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }} \
-            --build-arg DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }} \
-            --build-arg DJANGO_DEBUG=${{ secrets.DJANGO_DEBUG }} \
-            --tag $REGISTRY/$IMAGE_NAME:$TAG \
-            --tag $REGISTRY/$IMAGE_NAME:latest
-
-          # Push the images
-          docker push $REGISTRY/$IMAGE_NAME:$TAG
-          docker push $REGISTRY/$IMAGE_NAME:latest
+          docker build -t ${{ secrets.REGISTRY }}/${{ secrets.IMAGE_NAME }}:${{ secrets.GITHUB_SHA }} \
+            --build-arg DJANGO_ALLOWED_HOSTS="${{ secrets.DJANGO_ALLOWED_HOSTS }}" \
+            --build-arg DJANGO_DEBUG="${{ secrets.DJANGO_DEBUG }}" \
+            --build-arg ADMIN_USER="${{ secrets.ADMIN_USER }}" \
+            --build-arg ADMIN_EMAIL="${{ secrets.ADMIN_EMAIL }}" \
+            --build-arg ADMIN_PASSWORD="${{ secrets.ADMIN_PASSWORD }}" \
+            --build-arg FAKE_USER_PASSWORD="${{ secrets.FAKE_USER_PASSWORD }}" \
+            --build-arg DB_NAME="${{ secrets.DB_NAME }}" \
+            --build-arg DB_USER="${{ secrets.DB_USER }}" \
+            --build-arg DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
+            --build-arg DB_HOST="${{ secrets.DB_HOST }}" \
+            --build-arg DB_PORT="${{ secrets.DB_PORT }}" \
+            --build-arg DJANGO_SECRET_KEY="${{ secrets.DJANGO_SECRET_KEY }}" .
+            
+          docker push ${{ secrets.REGISTRY }}/${{ secrets.IMAGE_NAME }}:${{ secrets.GITHUB_SHA }}
