@@ -7,7 +7,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.actor }}/python-django-achievementhq
-  TAG: ${{ github.sha }} # Use the commit SHA as the image tag
+  TAG: ${{ github.sha }}
 
 jobs:
   publish:
@@ -21,35 +21,78 @@ jobs:
         run: echo "ACTIONS_RUNNER_DEBUG=true" >> $GITHUB_ENV
 
       - name: Login to GitHub Container Registry
-        run: |
-          echo "${{ secrets.PAT }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
-
-      - name: Set up .env Variables
-        run: |
-          echo "DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }}" >> .env
-          echo "DJANGO_DEBUG=${{ secrets.DJANGO_DEBUG }}" >> .env
-          echo "ADMIN_USER=${{ secrets.ADMIN_USER }}" >> .env
-          echo "ADMIN_EMAIL=${{ secrets.ADMIN_EMAIL }}" >> .env
-          echo "ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}" >> .env
-          echo "FAKE_USER_PASSWORD=${{ secrets.FAKE_USER_PASSWORD }}" >> .env
-          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
-          echo "DB_USER=${{ secrets.DB_USER }}" >> .env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
-          echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
-          echo "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
+        env:
+          PAT: ${{ secrets.PAT }}
+        run: echo "$PAT" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
 
       - name: Validate Secrets Injection
         run: |
-          for var in DJANGO_ALLOWED_HOSTS DJANGO_DEBUG ADMIN_USER ADMIN_EMAIL ADMIN_PASSWORD FAKE_USER_PASSWORD DB_NAME DB_USER DB_PASSWORD DB_HOST DB_PORT DJANGO_SECRET_KEY; do
-            if [ -z "${!var}" ]; then
-              echo "Error: $var is missing or empty"
-            else
-              echo "$var is set"
-            fi
-          done
+          if [ -z "${{ secrets.DJANGO_ALLOWED_HOSTS }}" ]; then
+            echo "Error: DJANGO_ALLOWED_HOSTS is missing or empty"
+          else
+            echo "DJANGO_ALLOWED_HOSTS is set"
+          fi
+          if [ -z "${{ secrets.DJANGO_DEBUG }}" ]; then
+            echo "Error: DJANGO_DEBUG is missing or empty"
+          else
+            echo "DJANGO_DEBUG is set"
+          fi
+          if [ -z "${{ secrets.ADMIN_USER }}" ]; then
+            echo "Error: ADMIN_USER is missing or empty"
+          else
+            echo "ADMIN_USER is set"
+          fi
+          if [ -z "${{ secrets.ADMIN_EMAIL }}" ]; then
+            echo "Error: ADMIN_EMAIL is missing or empty"
+          else
+            echo "ADMIN_EMAIL is set"
+          fi
+          if [ -z "${{ secrets.ADMIN_PASSWORD }}" ]; then
+            echo "Error: ADMIN_PASSWORD is missing or empty"
+          else
+            echo "ADMIN_PASSWORD is set"
+          fi
+          if [ -z "${{ secrets.FAKE_USER_PASSWORD }}" ]; then
+            echo "Error: FAKE_USER_PASSWORD is missing or empty"
+          else
+            echo "FAKE_USER_PASSWORD is set"
+          fi
+          if [ -z "${{ secrets.DB_NAME }}" ]; then
+            echo "Error: DB_NAME is missing or empty"
+          else
+            echo "DB_NAME is set"
+          fi
+          if [ -z "${{ secrets.DB_USER }}" ]; then
+            echo "Error: DB_USER is missing or empty"
+          else
+            echo "DB_USER is set"
+          fi
+          if [ -z "${{ secrets.DB_PASSWORD }}" ]; then
+            echo "Error: DB_PASSWORD is missing or empty"
+          else
+            echo "DB_PASSWORD is set"
+          fi
+          if [ -z "${{ secrets.DB_HOST }}" ]; then
+            echo "Error: DB_HOST is missing or empty"
+          else
+            echo "DB_HOST is set"
+          fi
+          if [ -z "${{ secrets.DB_PORT }}" ]; then
+            echo "Error: DB_PORT is missing or empty"
+          else
+            echo "DB_PORT is set"
+          fi
+          if [ -z "${{ secrets.DJANGO_SECRET_KEY }}" ]; then
+            echo "Error: DJANGO_SECRET_KEY is missing or empty"
+          else
+            echo "DJANGO_SECRET_KEY is set"
+          fi
 
       - name: Build and Push Docker Image
+        env:
+          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+          DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
+          DJANGO_DEBUG: ${{ secrets.DJANGO_DEBUG }}
         run: |
           echo "Building Docker image with the following parameters:"
           echo "REGISTRY: $REGISTRY"
