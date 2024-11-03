@@ -91,11 +91,12 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           echo "Building Docker image with the following parameters:"
-          echo "REGISTRY: ${{ secrets.REGISTRY }}"
-          echo "IMAGE_NAME: ${{ secrets.IMAGE_NAME }}"
-          echo "TAG: ${{ secrets.GITHUB_SHA }}"
+          echo "REGISTRY: $REGISTRY"
+          echo "IMAGE_NAME: $IMAGE_NAME"
+          echo "TAG: $TAG"
 
-          docker build -t ${{ secrets.REGISTRY }}/${{ secrets.IMAGE_NAME }}:${{ secrets.GITHUB_SHA }} \
+          # Build the Docker image
+          docker build -t $REGISTRY/$IMAGE_NAME:$TAG \
             --build-arg DJANGO_ALLOWED_HOSTS="${{ secrets.DJANGO_ALLOWED_HOSTS }}" \
             --build-arg DJANGO_DEBUG="${{ secrets.DJANGO_DEBUG }}" \
             --build-arg ADMIN_USER="${{ secrets.ADMIN_USER }}" \
@@ -109,4 +110,5 @@ jobs:
             --build-arg DB_PORT="${{ secrets.DB_PORT }}" \
             --build-arg DJANGO_SECRET_KEY="${{ secrets.DJANGO_SECRET_KEY }}" .
             
-          docker push ${{ secrets.REGISTRY }}/${{ secrets.IMAGE_NAME }}:${{ secrets.GITHUB_SHA }}
+          # Push the Docker image
+          docker push $REGISTRY/$IMAGE_NAME:$TAG
