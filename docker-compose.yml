@@ -9,10 +9,14 @@ services:
       - postgres_data:/var/lib/postgresql/data
   
   web:
+    image: ghcr.io/monatemedia/python-django-achievementhq:latest
     build:
       context: .
-    env_file:
-      - .env
+    environment:
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS}
+      DJANGO_DEBUG: ${DJANGO_DEBUG}
+
     volumes:
       - static:/staticfiles
     ports:

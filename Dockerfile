@@ -1,15 +1,5 @@
 # Build stage
-FROM python:3.12-slim as build
-
-# Add these lines at the top to accept build arguments
-ARG DJANGO_SECRET_KEY
-ARG DJANGO_ALLOWED_HOSTS
-ARG DJANGO_DEBUG
-
-# Set the build arguments as environment variables
-ENV DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
-ENV DJANGO_ALLOWED_HOSTS=$DJANGO_ALLOWED_HOSTS
-ENV DJANGO_DEBUG=$DJANGO_DEBUG
+FROM python:3.12-slim AS build
 
 # Upgrade pip and install dependencies
 RUN apt-get update && \
@@ -38,7 +28,7 @@ RUN mkdir -p /app/staticfiles
 RUN python manage.py collectstatic --noinput
 
 # Production stage
-FROM python:3.12-slim as production
+FROM python:3.12-slim AS production
 
 # Install cron in the production stage
 RUN apt-get update && \
