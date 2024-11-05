@@ -111,7 +111,7 @@ jobs:
 
   deploy:
     needs: publish
-    name: Deploy Image
+    name: Deploy Docker Image
     runs-on: ubuntu-latest
 
     steps:
@@ -121,19 +121,19 @@ jobs:
         run: |
           install -m 600 -D /dev/null ~/.ssh/id_rsa
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
       - name: connect and pull
         run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
           cd ${{ secrets.WORK_DIR }} &&
-          DB_NAME=${{ secrets.DB_NAME }} \
-          DB_USER=${{ secrets.DB_USER }} \
-          DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
-          DB_HOST=${{ secrets.DB_HOST }} \
-          DB_PORT=${{ secrets.DB_PORT }} \
-          DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }} \
-          DJANGO_DEBUG=${{ secrets.DJANGO_DEBUG }} \
-          DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }} \
+          DB_NAME=\"${{ secrets.DB_NAME }}\" \
+          DB_USER=\"${{ secrets.DB_USER }}\" \
+          DB_PASSWORD=\"${{ secrets.DB_PASSWORD }}\" \
+          DB_HOST=\"${{ secrets.DB_HOST }}\" \
+          DB_PORT=\"${{ secrets.DB_PORT }}\" \
+          DJANGO_ALLOWED_HOSTS=\"${{ secrets.DJANGO_ALLOWED_HOSTS }}\" \
+          DJANGO_DEBUG=\"${{ secrets.DJANGO_DEBUG }}\" \
+          DJANGO_SECRET_KEY=\"${{ secrets.DJANGO_SECRET_KEY }}\" \
           docker compose pull && docker compose up -d"
 
       - name: cleanup

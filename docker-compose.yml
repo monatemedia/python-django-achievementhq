@@ -9,12 +9,12 @@ services:
       - postgres_data:/var/lib/postgresql/data
   
   web:
-    volumes:
-      - static:/staticfiles
     build:
       context: .
-    env_file: 
+    env_file:
       - .env
+    volumes:
+      - static:/staticfiles
     ports:
       - "8000:8000"
     depends_on:
