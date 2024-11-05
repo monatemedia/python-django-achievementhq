@@ -24,9 +24,6 @@ COPY ./achievementhq /app
 # Ensure static files can be collected
 RUN mkdir -p /app/staticfiles
 
-# Collect static files
-RUN python manage.py collectstatic --noinput
-
 # Production stage
 FROM python:3.12-slim AS production
 
@@ -42,9 +39,6 @@ WORKDIR /app
 COPY --from=build /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
 COPY --from=build /usr/local/bin/gunicorn /usr/local/bin/gunicorn
 COPY --from=build /app /app
-
-# Copy static files from build to production stage
-COPY --from=build /app/staticfiles /app/staticfiles
 
 # Copy entry point into production stage
 COPY ./entrypoint.sh /app/entrypoint.sh

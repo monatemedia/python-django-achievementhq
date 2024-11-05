@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e
 
+# Collect static files
+python manage.py collectstatic --noinput
+
 # Run migrations
 echo "Running migrations..."
 python manage.py migrate --noinput
