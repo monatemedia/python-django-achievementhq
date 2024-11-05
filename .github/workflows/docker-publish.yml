@@ -21,91 +21,18 @@ jobs:
         run: |
           echo ${{ secrets.PAT }} | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
 
-      - name: Validate Secrets Injection
-        run: |
-          if [ -z "${{ secrets.DJANGO_ALLOWED_HOSTS }}" ]; then
-            echo "Error: DJANGO_ALLOWED_HOSTS is missing or empty"
-          else
-            echo "DJANGO_ALLOWED_HOSTS is set"
-          fi
-          if [ -z "${{ secrets.DJANGO_DEBUG }}" ]; then
-            echo "Error: DJANGO_DEBUG is missing or empty"
-          else
-            echo "DJANGO_DEBUG is set"
-          fi
-          if [ -z "${{ secrets.ADMIN_USER }}" ]; then
-            echo "Error: ADMIN_USER is missing or empty"
-          else
-            echo "ADMIN_USER is set"
-          fi
-          if [ -z "${{ secrets.ADMIN_EMAIL }}" ]; then
-            echo "Error: ADMIN_EMAIL is missing or empty"
-          else
-            echo "ADMIN_EMAIL is set"
-          fi
-          if [ -z "${{ secrets.ADMIN_PASSWORD }}" ]; then
-            echo "Error: ADMIN_PASSWORD is missing or empty"
-          else
-            echo "ADMIN_PASSWORD is set"
-          fi
-          if [ -z "${{ secrets.FAKE_USER_PASSWORD }}" ]; then
-            echo "Error: FAKE_USER_PASSWORD is missing or empty"
-          else
-            echo "FAKE_USER_PASSWORD is set"
-          fi
-          if [ -z "${{ secrets.DB_NAME }}" ]; then
-            echo "Error: DB_NAME is missing or empty"
-          else
-            echo "DB_NAME is set"
-          fi
-          if [ -z "${{ secrets.DB_USER }}" ]; then
-            echo "Error: DB_USER is missing or empty"
-          else
-            echo "DB_USER is set"
-          fi
-          if [ -z "${{ secrets.DB_PASSWORD }}" ]; then
-            echo "Error: DB_PASSWORD is missing or empty"
-          else
-            echo "DB_PASSWORD is set"
-          fi
-          if [ -z "${{ secrets.DB_HOST }}" ]; then
-            echo "Error: DB_HOST is missing or empty"
-          else
-            echo "DB_HOST is set"
-          fi
-          if [ -z "${{ secrets.DB_PORT }}" ]; then
-            echo "Error: DB_PORT is missing or empty"
-          else
-            echo "DB_PORT is set"
-          fi
-          if [ -z "${{ secrets.DJANGO_SECRET_KEY }}" ]; then
-            echo "Error: DJANGO_SECRET_KEY is missing or empty"
-          else
-            echo "DJANGO_SECRET_KEY is set"
-          fi
-
-      - name: Build and Push Docker Image
+      - name: Build Docker Image
         run: |
           echo "Building Docker image with the following parameters:"
           echo "REGISTRY: $REGISTRY"
           echo "IMAGE_NAME: $IMAGE_NAME"
           echo "TAG: $TAG"
 
-          # Build the Docker image
-          docker build -t $REGISTRY/$IMAGE_NAME:$TAG \
-            --build-arg DJANGO_ALLOWED_HOSTS="${{ secrets.DJANGO_ALLOWED_HOSTS }}" \
-            --build-arg DJANGO_DEBUG="${{ secrets.DJANGO_DEBUG }}" \
-            --build-arg ADMIN_USER="${{ secrets.ADMIN_USER }}" \
-            --build-arg ADMIN_EMAIL="${{ secrets.ADMIN_EMAIL }}" \
-            --build-arg ADMIN_PASSWORD="${{ secrets.ADMIN_PASSWORD }}" \
-            --build-arg FAKE_USER_PASSWORD="${{ secrets.FAKE_USER_PASSWORD }}" \
-            --build-arg DB_NAME="${{ secrets.DB_NAME }}" \
-            --build-arg DB_USER="${{ secrets.DB_USER }}" \
-            --build-arg DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
-            --build-arg DB_HOST="${{ secrets.DB_HOST }}" \
-            --build-arg DB_PORT="${{ secrets.DB_PORT }}" \
-            --build-arg DJANGO_SECRET_KEY="${{ secrets.DJANGO_SECRET_KEY }}" .
-            
+          # Build the Docker image without unnecessary build args
+          docker build -t $REGISTRY/$IMAGE_NAME:$TAG .
+
+      - name: Push Docker Image
+        run: |
           # Push the Docker image
           docker push $REGISTRY/$IMAGE_NAME:$TAG
 
@@ -123,18 +50,12 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: connect and pull
-        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
-          cd ${{ secrets.WORK_DIR }} &&
-          DB_NAME=\"${{ secrets.DB_NAME }}\" \
-          DB_USER=\"${{ secrets.DB_USER }}\" \
-          DB_PASSWORD=\"${{ secrets.DB_PASSWORD }}\" \
-          DB_HOST=\"${{ secrets.DB_HOST }}\" \
-          DB_PORT=\"${{ secrets.DB_PORT }}\" \
-          DJANGO_ALLOWED_HOSTS=\"${{ secrets.DJANGO_ALLOWED_HOSTS }}\" \
-          DJANGO_DEBUG=\"${{ secrets.DJANGO_DEBUG }}\" \
-          DJANGO_SECRET_KEY=\"${{ secrets.DJANGO_SECRET_KEY }}\" \
-          docker compose pull && docker compose up -d"
+      - name: Connect and Pull
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} " \
+            cd ${{ secrets.WORK_DIR }} && \
+            docker compose pull && docker compose up -d \
+          "
 
       - name: cleanup
         run: rm -rf ~/.ssh
