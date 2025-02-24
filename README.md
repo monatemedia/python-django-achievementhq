@@ -38,7 +38,8 @@
   <p align="center">
     Keep track of all your achievements, no matter how big or small they are! 🎯 Achievement HQ is a social network for you and your friends to track and celebrate each other's achievements!
     <br />
-    <a href="https://achievementhq.monatemedia.com/"><strong>View Demo »</strong></a>
+    <br />
+    <a href="https://achievementhq.monatemedia.com/" target="_blank"><strong>View Demo »</strong></a>
     <br />
     <br />
     <a href="mailto:edward@monatemedia.com?subject=Bug%20Report%20for%20AchievementHQ&body=**Bug%20Description:**%0D%0A%0D%0A**Steps%20to%20Reproduce:**%0D%0A1.%20Step%201%0D%0A2.%20Step%202%0D%0A3.%20Step%203%0D%0A%0D%0A**Expected%20Behavior:**%0D%0A%0D%0A**Actual%20Behavior:**%0D%0A%0D%0A**Screenshots%20or%20Error%20Messages:**%0D%0A%0D%0A**Browser%20and%20OS%20(Version):**%0D%0A%0D%0A**Additional%20Information:**%0D%0A%0D%0A">Report Bug</a>
