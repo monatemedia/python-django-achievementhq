@@ -1,24 +1,36 @@
 services:
   achievementhq-db:
-    image: postgres:17
+    container_name: achievementhq-db
+    image: postgres:latest
     ports:
       - "5432:5432"
+    env_file:
+      - .env.prod
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - .env.prod:/app/.env.prod
+    networks:
+      - proxy-network
 
-  achievementhq-web:  # Name of the container
-    image: ghcr.io/monatemedia/python-django-achievementhq:latest # Image from the GitHub Container Registry
+  achievementhq-web:
+    container_name: achievementhq-web
+    image: ghcr.io/monatemedia/python-django-achievementhq:latest
     environment:
-      VIRTUAL_HOST: achievementhq.monatemedia.com # Tell nginx-proxy to route traffic based on the service name eg. hello-world.monatemedia.com
-      LETSENCRYPT_HOST: achievementhq.monatemedia.com # Enable Let's Encrypt SSL for this domain
-      VIRTUAL_PORT: 8000 # Tell nginx-proxy that the container serves on port 8000
+      DJANGO_SETTINGS_MODULE: achievementhq.settings
+      VIRTUAL_HOST: achievementhq.monatemedia.com
+      LETSENCRYPT_HOST: achievementhq.monatemedia.com
+      VIRTUAL_PORT: 8000
+    env_file:
+      - .env.prod
     depends_on:
-      - db
-    volumes:
-      - .env.prod:/app/.env.prod
+      - achievementhq-db
     ports:
       - "8000:8000"
+    networks:
+      - proxy-network
 
 volumes:
   postgres_data:
+
+networks:
+  proxy-network:
+    external: true

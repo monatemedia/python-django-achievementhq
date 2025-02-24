@@ -30,18 +30,25 @@ FROM python:3.12-slim AS production
 # Install runtime dependencies for PostgreSQL
 RUN apt-get update && apt-get install -y --no-install-recommends \
    libpq5 \
+   postgresql-client \
+   sudo \
    && rm -rf /var/lib/apt/lists/*
 
-RUN useradd -m -r appuser && \
-   mkdir /app && \
-   chown -R appuser /app
+# Create a non-root user and grant permissions
+RUN useradd -m -r -d /home/appuser appuser && \
+   mkdir -p /app && \
+   chown -R appuser:appuser /app
+
+# Ensure non-root user can access psql
+RUN ln -s /usr/bin/psql /usr/local/bin/psql && \
+   echo "appuser ALL=(ALL) NOPASSWD: /usr/bin/psql" >> /etc/sudoers
+
+# Set the working directory
+WORKDIR /app
 
 # Copy the Python dependencies from the builder stage
 COPY --from=builder /usr/local/lib/python3.12/site-packages/ /usr/local/lib/python3.12/site-packages/
 COPY --from=builder /usr/local/bin/ /usr/local/bin/
-
-# Set the working directory
-WORKDIR /app
 
 # Copy application code
 COPY --chown=appuser:appuser /achievementhq /app
@@ -49,7 +56,8 @@ COPY --chown=appuser:appuser entrypoint.prod.sh /app
 
 # Set environment variables to optimize Python
 ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1 
+ENV PYTHONUNBUFFERED=1
+ENV PATH="/usr/local/bin:$PATH"
 
 # Switch to non-root user
 USER appuser
