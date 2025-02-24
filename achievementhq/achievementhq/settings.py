@@ -10,24 +10,45 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-from pathlib import Path
-
 import os
+from pathlib import Path
+from dotenv import load_dotenv
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Define the base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load environment variables
+def load_environment():
+    env_files = [".env", ".env.local", ".env.prod"]
+    search_dirs = [BASE_DIR, BASE_DIR.parent]
+
+    for directory in search_dirs:
+        for env_file in env_files:
+            env_path = directory / env_file
+            if env_path.exists():
+                load_dotenv(env_path)
+                print(f"Loaded environment variables from: {env_path}")
+                return  # Stop after loading the first found file
+
+    print("No environment file found.")
+
+# Call the function to load the environment
+load_environment()
+
+# Get the environment type
+DJANGO_ENVIRONMENT = os.getenv("DJANGO_ENVIRONMENT").lower()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-tbc7b14m&#%4g9&0cf&yd71j-)l#fs50fi-jd$8&&m)n%&#iez'
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = (os.environ.get('DEBUG') == "True")
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS","127.0.0.1").split(",")
+CSRF_TRUSTED_ORIGINS = os.getenv("DJANGO_CSRF_TRUSTED_ORIGINS","https://127.0.0.1").split(",")
 
 
 # Application definition
@@ -51,6 +72,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -84,12 +106,27 @@ WSGI_APPLICATION = 'achievementhq.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Database configuration
+if DJANGO_ENVIRONMENT == "development":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / "db.sqlite3",
+        }
     }
-}
+elif DJANGO_ENVIRONMENT == "production":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DATABASE_NAME', 'polls'),
+            'USER': os.getenv('DATABASE_USERNAME', 'myprojectuser'),
+            'PASSWORD': os.getenv('DATABASE_PASSWORD', 'password'),
+            'HOST': os.getenv('DATABASE_HOST', 'db'),
+            'PORT': os.getenv('DATABASE_PORT', '5432'),
+        }
+    }
+else:
+    raise ValueError("Invalid DJANGO_ENVIRONMENT value. Use 'development' or 'production'.")
 
 
 # Password validation
@@ -138,3 +175,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}

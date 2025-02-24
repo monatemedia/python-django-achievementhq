@@ -7,8 +7,11 @@ name = "pypi"
 django = "*"
 faker = "*"
 python-decouple = "*"
+gunicorn = "*"
+whitenoise = "*"
 
 [dev-packages]
+django-debug-toolbar = "*"
 
 [requires]
 python_version = "3.12"

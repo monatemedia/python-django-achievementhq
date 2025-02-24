@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:17
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - .env.prod:/app/.env.prod
+    env_file:
+      - .env.prod
+
+  django-web:
+    build: .
+    container_name: django-docker
+    depends_on:
+      - db
+    env_file:
+      - .env.prod
+    volumes:
+      - .env.prod:/app/.env.prod
+    ports:
+      - "8000:8000"
+
+volumes:
+  postgres_data:
