@@ -1,25 +1,22 @@
 services:
-  db:
-    image: postgres:17
-    ports:
+  achievementhq-db:
+    container_name: achievementhq-db
+    image: postgres:latest
+    ports: 
       - "5432:5432"
+    env_file:
+      - .env.prod
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - .env.prod:/app/.env.prod
-    env_file:
-      - .env.prod
 
-  django-web:
-    build: .
-    container_name: django-docker
-    depends_on:
-      - db
+  achievementhq-web:
+    container_name: achievementhq-web
+    image: ghcr.io/monatemedia/python-django-achievementhq:latest
     env_file:
       - .env.prod
-    volumes:
-      - .env.prod:/app/.env.prod
+    depends_on:
+      - achievementhq-db
     ports:
       - "8000:8000"
-
 volumes:
   postgres_data:
